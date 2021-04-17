@@ -59,7 +59,7 @@ plugins:
 
 author:
   name   : "Guillermo Paoletti"
-  avatar : "/assets/images/bio-photo-raw.jpg"
+  avatar : "/assets/images/bio-photo-square.jpg"
   bio    : "Just a webpage solving my day to day problems."
   links:
     - label: "Website"

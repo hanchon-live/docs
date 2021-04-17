@@ -3,4 +3,4 @@ permalink: /about/
 title: "About"
 ---
 
-Soluciones a problemas del día a día.
+Just a webpage solving my day to day problems.
