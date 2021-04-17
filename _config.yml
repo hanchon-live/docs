@@ -22,7 +22,8 @@ twitter_username: gepaoletti
 github_username: hanchon
 minimal_mistakes_skin: default
 search: true
-
+logo: /assets/icon/favicon.ico
+repository: hanchon-live/docs
 # Build settings
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
