@@ -73,7 +73,49 @@ $ curl 127.0.0.1:7000/private
 
 ## Create Google Credentials
 
-Screenshots creating the google auth
+To set up the credentials we are going to need:
+- a Google account
+<!-- - a Domain where our application is going to be hosted.  -->
+
+
+Access to the Google Cloud Console with your Google account: [GoogleCloud](https://console.cloud.google.com/apis/dashboard)
+
+- Create a new project:
+{% include figure image_path="/assets/posts/google-login/create-project.png" alt="New project" caption="Google Cloud screen when creating a new project" %}
+
+- Get your credentials:
+  - Select your newly created project in the google console webpage.
+  - Go to Credentials on the side panel.
+  - Go to Create Credentials -> OAuth client ID.
+  - We need to set up our consent screen, so we are going to set the `User type` to `External`.
+    - First screen (App info):
+      - Set up the App Name, Support Email. The Logo is optional.
+      - {% include figure image_path="/assets/posts/google-login/google-oauth-1.png" alt="App info screen" %}
+      - Set up developer email
+
+    - Second screen (Scopes):
+      - Add `userinfo.email`, `userinfo.profile`, `openid` -> Save and continue.
+      - {% include figure image_path="/assets/posts/google-login/google-oauth-2.png" alt="Scopes screen" %}
+
+    - Third screen (Test users):
+      - Add your email as a test user to start testing our application.
+      - {% include figure image_path="/assets/posts/google-login/google-oauth-3.png" alt="Test users" %}
+  
+  - After the consent screen is ready we can finally create the OAuth client id. So we go to Credentials -> Create Credentials -> OAuth client ID.
+  - Set up the OAuth client ID:
+    - Application Type: Web Application.
+    - Name: FastAPI-Login (or any other name).
+    - Authorized JavaScript origins: `http://127.0.0.1:7000`.
+    - Authorized redirect URIs: `http://127.0.0.1:7000`.
+    - (These urls should be modified to allow requests from your domain when the app is hosted in a server.)
+  - After creating the client, it will pop a modal with your `client ID` and `client secret`
+  - {% include figure image_path="/assets/posts/google-login/google-oauth-4.png" alt="Secrets" %}
+
+
+
+
+
+
 
 ## Set up OAuth on our project
 We are going to use libs al ready created for [Starlette]() because FastAPI is build on top of that.
@@ -106,8 +148,8 @@ from starlette.config import Config
 from authlib.integrations.starlette_client import OAuth
 
 # OAuth settings
-GOOGLE_CLIENT_ID = os.environ.get('API_SECRET_KEY') or None
-GOOGLE_CLIENT_SECRET = os.environ.get('API_SECRET_KEY') or None
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID') or None
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET') or None
 if GOOGLE_CLIENT_ID is None or GOOGLE_CLIENT_SECRET is None:
     raise BaseException("Missing env variables")
 
@@ -126,6 +168,29 @@ oauth.register(
     }
 )
 ```
+
+### Optional create a file to run the app:
+- Create a script to call the run.py file using setting the env vars. Make sure you add this file to .gitignore to avoid pushing your credentials to your repository.
+  Instructions assuming you are inside the project folder:
+  - Create the file: `run.sh`:
+    ``` sh
+    source .venv/bin/activate
+    export GOOGLE_CLIENT_ID=615...
+    export GOOGLE_CLIENT_SECRET=xcl...
+    python3 run.py
+    ``` 
+  - Make the code executable:
+    ``` sh
+    chmod +x run.sh
+    ```
+  - Run the app: 
+    ```sh 
+    ./run.sh
+    ```
+  - If you are running `Windows`, you can set the env vars using `set` instead of `export`.
+
+
+
 
 # WIP
 Work in Progress
