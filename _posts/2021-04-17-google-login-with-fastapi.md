@@ -1,6 +1,6 @@
 ---
 title: "Use Google Login (OAuth) with FastAPI - Python"
-date: 2021-04-17T12:59:30-04:00
+date: 2021-04-17T12:59:30+01:00
 categories:
   - guides
 tags:
@@ -241,8 +241,8 @@ async def logout(request: Request):
     return RedirectResponse(url='/')
 ```
 
-# Next Steps, create and use a JWT for our users:
-I'm going to make another tutorial on how to only use sessions for the OAuth and then keep the `login` status using a `JWT Token`, in case you don't want to use sessions after getting the Google Response.
-
 # Link to the code:
-This app is uploaded to github, you can view the repository using this [link](https://www.github.com/hanchon-live/tutorial-fastapi-oauth.git)
+This app is uploaded to github, you can view the repository using this [link](https://github.com/hanchon-live/tutorial-fastapi-oauth/tree/guide-1), this tutorial is the branch `guide-1`
+
+# Next Steps, create and use a JWT for our users:
+The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial just uses sessions cookies for `OAuth` and to create a `JTW` token. Every other endpoint is going to use `JTW` Bearer token authentication.

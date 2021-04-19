@@ -1,6 +1,6 @@
 ---
 title: "Terms and Privacy Policy"
-date: 2021-04-16T13:59:30-04:00
+date: 2021-04-16T13:59:30+01:00
 ---
 ## Privacy Policy
 This website only uses Google Analytics and Google Adsense.
