@@ -220,7 +220,7 @@ We are going to write the front end in our main app.
 
 
 The route `/` will only have a `Log In` button, to call the `/auth/login` endpoint. 
-The route `/` will have a button to request the server to generate a `JWT` token with the google response. (This process ideally will be automatically, but let's make a button to see it works).
+The route `/token` will have a button to request the server to generate a `JWT` token with the google response. (This process ideally will be automatically, but let's make a button to see it works).
 
 File: `main.py`
 ``` python
