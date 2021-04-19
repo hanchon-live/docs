@@ -6,6 +6,7 @@ categories:
 tags:
   - fastapi
   - security
+  - oauth
 ---
 We are going to allow the user to login using its Google Credentials via OAuth in our `FastAPI` project.
 
@@ -21,7 +22,7 @@ This guide assumes you already have installed in your system `python3.8` (or new
 
 ## Setting up the environment
 We need to install [FastAPI](https://fastapi.tiangolo.com/), so we are going to create a virtual environment, activate it and use `pip` to install the lib.
-We are going to use [Uvicorn](https://www.uvicorn.org/) to run our `FastAPI` app.
+We are going to use [Uvicorn](https://www.uvicorn.org/) to run the `FastAPI` app.
 
 ```
 mkdir fastapi-googlelogin
@@ -36,7 +37,7 @@ pip install uvicorn
 &nbsp;
 
 # Development:
-After we have all the libs installed in our virtualenv, we can start to code.
+After we have all the libs installed in our `virtualenv`, we can start to code.
 
 ## Create a basic App
 The first step is to create a simple FastAPI app with a public endpoint. Let's create a `run.py` file in the root folder:
@@ -79,7 +80,7 @@ Access to the Google Cloud Console with your Google account: [GoogleCloud](https
   - Select your newly created project in the google console webpage.
   - Go to Credentials on the side panel.
   - Go to Create Credentials -> OAuth client ID.
-  - We need to set up our consent screen, so we are going to set the `User type` to `External`.
+  - We need to set up the consent screen, so we are going to set the `User type` to `External`.
     - First screen (App info):
       - Set up the App Name, Support Email. The Logo is optional.
       - {% include figure image_path="/assets/posts/google-login/google-oauth-1.png" alt="App info screen" %}
@@ -90,7 +91,7 @@ Access to the Google Cloud Console with your Google account: [GoogleCloud](https
       - {% include figure image_path="/assets/posts/google-login/google-oauth-2.png" alt="Scopes screen" %}
 
     - Third screen (Test users):
-      - Add your email as a test user to start testing our application.
+      - Add your email as a test user to start testing the application.
       - {% include figure image_path="/assets/posts/google-login/google-oauth-3.png" alt="Test users" %}
   
   - After the consent screen is ready we can finally create the OAuth client id. So we go to Credentials -> Create Credentials -> OAuth client ID.
@@ -103,10 +104,10 @@ Access to the Google Cloud Console with your Google account: [GoogleCloud](https
   - After creating the client, it will pop a modal with your `client ID` and `client secret`
   - {% include figure image_path="/assets/posts/google-login/google-oauth-4.png" alt="Secrets" %}
 
-## Set up OAuth on our project
-We are going to use libs already created for [Starlette](https://www.starlette.io/) because FastAPI is build on top of that.
-We need to install [authlib](https://github.com/lepture/authlib) in our virtualenv and we are going to use this lib to handle the Google Login.
-We need to install [itsdangerous](https://itsdangerous.palletsprojects.com/en/1.1.x/), because in the next step we are going to use starlette middleware sessions that requires it.
+## Set up OAuth in the project
+We are going to use libs already created for [Starlette](https://www.starlette.io/) because `FastAPI` is build on top of that.
+We need to install [authlib](https://github.com/lepture/authlib) in our `virtualenv` and we are going to use this lib to handle the Google Login.
+We need to install [itsdangerous](https://itsdangerous.palletsprojects.com/en/1.1.x/), because in the next step we are going to use `Starlette` middleware sessions that requires it.
 
 ### Install the dependency
 
@@ -122,7 +123,7 @@ pip install itsdangerous
 We need the `client_id` and the `client_secret`. To avoid pushing our credentials to the server we are going to pass the values using the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. 
 To avoid running the code without this variables, we just ask if they are set and if they aren't we just stop the process.
 
-After getting the credentials in our code, we are going to register the `OAuth` client, we are going to just ask google for `openid email profile`.
+After getting the credentials in the code, we are going to register the `OAuth` client, we are going to just ask google for `openid email profile`.
 
 This code is added to the file: `fastapi-googlelogin/run.py`, after the `app=FastAPI()` line.
 
@@ -171,7 +172,7 @@ oauth.register(
 
 # Create login route:
 ## Add a middleware to get the session information
-We are going to add a session middleware in our FastAPI, so AuthLib can get and use the request session.
+We are going to add a session middleware in the `FastAPI` app, so AuthLib can get and use the request session.
 
 In the file: `run.py` we are going to add:
 ``` python
@@ -207,7 +208,7 @@ from authlib.integrations.starlette_client import OAuthError
 
 @app.route('/login')
 async def login(request: Request):
-    redirect_uri = request.url_for('auth')  # This creates the url for our /auth endpoint
+    redirect_uri = request.url_for('auth')  # This creates the url for the /auth endpoint
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 
