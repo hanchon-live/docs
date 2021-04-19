@@ -287,7 +287,7 @@ pip install pyjwt
 
 ## Create and decode tokens:
 
-We are going to need a `secret key` for our tokens, we can create one using the same method for the secret key using in the `Starlette`'s Middleware in de previous guide.
+We are going to need a `secret key` for our tokens, we can create one using the same method for the secret key used in the `Starlette`'s Middleware in de previous guide.
 To avoid creating a database just for this example, we are going to use a dictionary that only has one registered user.
 
 `Create_Token` will be the function that encodes the token and `get_current_user_email` will receive a token and returns us the email in case the token is valid.
