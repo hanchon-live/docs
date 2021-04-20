@@ -26,7 +26,7 @@ This guide assumes you already have installed in your system `python3.8` (or new
 All the steps to create the Google Credentials and the `login` and `auth` endpoint are defined in [Use Google Login (OAuth) with FastAPI - Python](/guides/google-login-with-fastapi/).
 
 # Support for endpoints with different middlewares
-With `FastAPI` we can not set just an endpoint to have the middleware, it applies to all the routes. There is a way to resolve this is to create two apps and then mount both of them in our main app.
+With `FastAPI` we can not set just an endpoint to use a middleware, it applies to all the routes. There is a way to resolve this, we can create two sub-apps and then mount both of them in our main app.
 
 We are going to start developing on top of the last guide.
 ```sh
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
 ```
 
-We can test it running the `main.py` file. Make sure to set the SECRET_KEY variable on your environment or create an script to run the file.
+We can test it by running the `main.py` file. Make sure to set the SECRET_KEY variable on your environment or create an script to run the file.
 
 Example `run.sh`
 ``` sh
@@ -125,22 +125,24 @@ $ curl 127.0.0.1:7000/auth/
 ```
 
 # Move the auth code to the auth app
-Now that we have a sub-application for everything google login related, we are going to move the code in the `run.py` file, created in the previous guide to the `app/auth.py` file.
+Now that we have a sub-application for everything that is google login related, we are going to move the code in the `run.py` file, created in the previous guide, to the `app/auth.py` file.
 
-From that code we need to `/login` and the `/auth` endpoints. Let's rename `/auth` to `/validate_token` so it's not confusing with our sub-application base route.
+From that code we need the `/login` and the `/auth` endpoints. Let's rename `/auth` to `/validate_token` so it's not confusing with our sub-application base route.
 
 ## Modify your Google Cloud domains:
-We need to modify the authorized domains because now our endpoint has a `/auth` before the route.
-- Access to the Google Cloud Console with your Google account: [GoogleCloud](https://console.cloud.google.com/apis/dashboard)
+We need to modify the authorized domains because now we are going to redirect to a new endpoint.
+- Access to the Google Cloud Console with your Google account: [Google Cloud](https://console.cloud.google.com/apis/dashboard)
 - Go to Credentials -> OAuth client ID -> Click on edit your application
 - Change `http://127.0.0.1:7000/auth` to `http://127.0.0.1:7000/token`
 
-NOTE: this `/token` url is the redirect_uri, it's a frontend route. We are going to redirect after entering the google credentials to the frontend, and then pass it to the server to validate the response. The frontend can be hosted on any domain, we just need to change the url in this section and make the host available on a `CORSMiddleware`.
+This `/token` url it's a frontend route. We are going to redirect the user after entering the google credentials to the frontend, and then pass it to the server to validate the response (using javascript).
+
+The frontend can be hosted on any domain, we just need to change the url in this section and make the host available on a `CORSMiddleware` on the `FastAPI` app.
 
 
 ## Move the run.py code to app/auth.py:
-We are going to move the `auth` route to the newly created `validateToken` route, this endpoint will validate the token sent by google and create and send a `JWT` Token to the frontend.
-We are going to set the `redirect_uri` to our frontend, so it can have the date to later request a `JWT` token to the server.
+We are going to move the `auth` route code to the newly created `validateToken` route, this endpoint will validate the token sent by google and create and send a `JWT` Token to the frontend.
+We are going to set the `redirect_uri` to our frontend, so it can have the data to later request a `JWT` token to the server.
 
 So the flow will be:
 - Enter the `auth_app/login` endpoint.
@@ -216,11 +218,11 @@ async def auth(request: Request):
 ```
 
 ## Create a frontend to test the authentication:
-We are going to write the front end in our main app.
+We are going to write the frontend in our main app.
 
 
 The route `/` will only have a `Log In` button, to call the `/auth/login` endpoint. 
-The route `/token` will have a button to request the server to generate a `JWT` token with the google response. (This process ideally will be automatically, but let's make a button to see it works).
+The route `/token` will have a button to request the server to generate a `JWT` token with the google response. (This process ideally will be automatically called, but let's make a button to see how it works).
 
 File: `main.py`
 ``` python
@@ -287,10 +289,11 @@ pip install pyjwt
 
 ## Create and decode tokens:
 
-We are going to need a `secret key` for our tokens, we can create one using the same method for the secret key used in the `Starlette`'s Middleware in de previous guide.
+We are going to need a `secret key` for our tokens, we can create one using the same method for the secret key used in the `Starlette`'s Middleware configuration step in the previous guide ([Create Secret key with python](/guides/google-login-with-fastapi/#optional-create-a-secret-string-using-python)).
+
 To avoid creating a database just for this example, we are going to use a dictionary that only has one registered user.
 
-`Create_Token` will be the function that encodes the token and `get_current_user_email` will receive a token and returns us the email in case the token is valid.
+`create_Token` will be the function that encodes the token and `get_current_user_email` will receive a token and returns us the email in case the token is valid.
 
 Let's create the file `apps/jtw.py`:
 ``` python
@@ -326,11 +329,11 @@ if API_SECRET_KEY is None:
 API_ALGORITHM = os.environ.get('API_ALGORITHM') or 'HS256'
 API_ACCESS_TOKEN_EXPIRE_MINUTES = cast_to_number('API_ACCESS_TOKEN_EXPIRE_MINUTES') or 15
 
-# Token url (We should later create a token url that accepts just a user and a password to use swagger)
+# Token url (We should later create a token url that accepts just a user and a password to use it with Swagger)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/token')
 
 # Error
-credentials_exception = HTTPException(
+CREDENTIALS_EXCEPTION = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
     detail='Could not validate credentials',
     headers={'WWW-Authenticate': 'Bearer'},
@@ -365,23 +368,23 @@ async def get_current_user_email(token: str = Depends(oauth2_scheme)):
         payload = jwt.decode(token, API_SECRET_KEY, algorithms=[API_ALGORITHM])
         email: str = payload.get('sub')
         if email is None:
-            raise credentials_exception
+            raise CREDENTIALS_EXCEPTION
     except jwt.PyJWTError:
-        raise credentials_exception
+        raise CREDENTIALS_EXCEPTION
 
     if valid_email_from_db(email):
         return email
 
-    raise credentials_exception
+    raise CREDENTIALS_EXCEPTION
 
 ```
 
-Make sure you add your `API_SECRET_KEY` to your environment so your application can run withour errors.
+Make sure you add your `API_SECRET_KEY` to your environment so your application can run without errors.
 
 ## Return the JWT on auth/token endoing
-Lets import the necessaries functions and the exception to rewrite the `/token` route:
-Add to the file `apps/auth.py`:
+Lets import the necessaries functions and the exception to rewrite the `/token` route.
 
+Add to the file `apps/auth.py`:
 ``` python
 from apps.jwt import create_token
 from apps.jwt import valid_email_from_db
@@ -441,7 +444,7 @@ $ curl 127.0.0.1:7000/api/protected
 Let's call the protected endpoint using the `JWT` that we have stored in the `localstore` in our frontend.
 Update the `main.py` file to add a 3 new buttons to the route `/token` route to test the funcionality:
 
-NOTE: I'm going to use javascript's `fetch` to make the request simpler. Add this lines inside the HTMLResponse of the `/token` route.
+NOTE: I'm going to use javascript's `fetch` to make the request simpler. Add this lines inside the HTMLResponse of the `/token` route in the `main.py` file:
 
 ``` python
 <button onClick='fetch("http://127.0.0.1:7000/api/").then(
@@ -480,6 +483,6 @@ This app is uploaded to github, you can view the repository using this [link](ht
 
 # Next Steps, improve tokens:
 I'm going to make a third and last part of this guide with improvements to the tokens.
-- Blacklist tokens
-- Refresh tokens to avoid requesting the user and password every 15min
+- Blacklist tokens.
+- Refresh tokens to avoid requesting the user and password every 15min.
 - Security tokens, ask for user and password for important actions in case the JWT was stolen.
