@@ -22,6 +22,7 @@ twitter_username: gepaoletti
 github_username: hanchon
 minimal_mistakes_skin: default
 search: true
+search_full_content : true
 logo: /assets/icon/favicon.ico
 repository: hanchon-live/docs
 # Build settings
@@ -64,7 +65,7 @@ author:
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://hanchon-live.com"
+      url: "https://hanchon.live"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/gepaoletti"
