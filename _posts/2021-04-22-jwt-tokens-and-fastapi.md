@@ -9,7 +9,7 @@ tags:
   - oauth
   - JWT
 ---
-This guide is a follow up to the [Use Google Login (OAuth) with FastAPI and JWT](/guides/google-login-with-fastapi-and-jwt/), in the previous guide the added to our `FastAPI` application `JWT` support.
+This guide is a follow up to [Use Google Login (OAuth) with FastAPI and JWT](/guides/google-login-with-fastapi-and-jwt/), in the previous guide the added to our `FastAPI` application `JWT` support.
 
 Now we are going to improve this tokens and create a blacklist token to ban tokens in case is necessary or just to invalidate a token after an user logs out.
 Also we are going to create refresh tokens to avoid requesting the user credentials after each simple token expires.

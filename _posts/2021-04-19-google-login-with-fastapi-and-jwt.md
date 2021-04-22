@@ -9,7 +9,7 @@ tags:
   - oauth
   - JWT
 ---
-This guide is a follow up to the [Use Google Login (OAuth) with FastAPI - Python](/guides/google-login-with-fastapi/), in the previous guide We allowed the user to login using its Google Credentials via OAuth in our `FastAPI` project. 
+This guide is a follow up to [Use Google Login (OAuth) with FastAPI - Python](/guides/google-login-with-fastapi/), in the previous guide We allowed the user to login using its Google Credentials via OAuth in our `FastAPI` project. 
 
 {% include figure image_path="/assets/posts/google-login-jwt/header.png" alt="FastAPI and GoogleOAuth" caption="" %}
 
