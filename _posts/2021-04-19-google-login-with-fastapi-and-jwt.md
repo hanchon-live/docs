@@ -1,5 +1,5 @@
 ---
-title: "Use Google Login (OAuth) with FastAPI and JTW"
+title: "Use Google Login (OAuth) with FastAPI and JWT (Part 2)"
 date: 2021-04-19T12:52:30+01:00
 categories:
   - guides
@@ -11,7 +11,7 @@ tags:
 ---
 This guide is a follow up to the [Use Google Login (OAuth) with FastAPI - Python](/guides/google-login-with-fastapi/), in the previous guide We allowed the user to login using its Google Credentials via OAuth in our `FastAPI` project. 
 
-{% include figure image_path="/assets/posts/google-login-jtw/header.png" alt="Header image" caption="" %}
+{% include figure image_path="/assets/posts/google-login-jwt/header.png" alt="FastAPI and GoogleOAuth" caption="" %}
 
 In this guide we are going to create a `JWT` when the user is logged in and use the `JWT Bearer token authentication` for the private endpoints.
 
@@ -241,7 +241,7 @@ app.mount('/api', api_app)
 
 @app.get('/')
 async def root():
-    return HTMLResponse('<body><a href="/auth/login">Log In</button></body>')
+    return HTMLResponse('<body><a href="/auth/login">Log In</a></body>')
 
 
 @app.get('/token')
@@ -265,7 +265,7 @@ async def token(request: Request):
 
                 }
                 </script>
-                <button onClick="send()">Get FastAPI JTW Token</button>
+                <button onClick="send()">Get FastAPI JWT Token</button>
             ''')
 
 
@@ -295,7 +295,7 @@ To avoid creating a database just for this example, we are going to use a dictio
 
 `create_Token` will be the function that encodes the token and `get_current_user_email` will receive a token and returns us the email in case the token is valid.
 
-Let's create the file `apps/jtw.py`:
+Let's create the file `apps/jwt.py`:
 ``` python
 import os
 from datetime import datetime
@@ -412,7 +412,7 @@ If we test the application, the `Get FastAPI JWT Token` button will print on the
 ```
 
 ## Make the api endpoints protected
-Let's import the `JTW` function that we need to the file `apps/api.py`:
+Let's import the `JWT` function that we need to the file `apps/api.py`:
 
 ```python
 from apps.jwt import get_current_user_email
@@ -481,8 +481,7 @@ GET http://127.0.0.1:7000/api/protected 401 (Unauthorized)
 This app is uploaded to github, you can view the repository using this [link](https://github.com/hanchon-live/tutorial-fastapi-oauth/tree/guide-2), this tutorial is the branch `guide-2`
 
 
-# Next Steps, improve tokens:
-I'm going to make a third and last part of this guide with improvements to the tokens.
-- Blacklist tokens.
-- Refresh tokens to avoid requesting the user and password every 15min.
-- Security tokens, ask for user and password for important actions in case the JWT was stolen.
+# Related Guides:
+The [part 1](/guides/google-login-with-fastapi/) of this tutorial explains how to create a Google Application, and how to integrate the Google OAuth with our `FastAPI` project.
+
+The [part 3](/guides/jwt-tokens-and-fastapi) of this tutorial modifies the `Tokens` to improve its functionality and usability.

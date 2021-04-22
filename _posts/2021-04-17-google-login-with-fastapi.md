@@ -13,7 +13,7 @@ We are going to allow the user to login using its Google Credentials via OAuth i
 {% include toc icon="cog" title="Content" %}
 
 
-{% include figure image_path="/assets/posts/google-login/header.png" alt="Header image" caption="" %}
+{% include figure image_path="/assets/posts/google-login/header.png" alt="FastAPI and Google Login" caption="" %}
 
 
 
@@ -244,5 +244,7 @@ async def logout(request: Request):
 # Link to the code:
 This app is uploaded to github, you can view the repository using this [link](https://github.com/hanchon-live/tutorial-fastapi-oauth/tree/guide-1), this tutorial is the branch `guide-1`
 
-# Next Steps, create and use a JWT for our users:
-The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial just uses sessions cookies for `OAuth` and to create a `JTW` token. Every other endpoint is going to use `JTW` Bearer token authentication.
+# Related Guides:
+The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial just uses sessions cookies for `OAuth` and to create a `JWT` token. Every other endpoint is going to use `JWT` Bearer token authentication.
+
+The [part 3](/guides/jwt-tokens-and-fastapi) of this tutorial modifies the `Tokens` to improve its functionality and usability.
