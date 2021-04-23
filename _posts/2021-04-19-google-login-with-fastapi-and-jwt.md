@@ -276,7 +276,7 @@ if __name__ == '__main__':
 
 After running the application we can check that everything is working as intended, to check if it's really validating the token, we can just change a letter on your browser's url bar when the `/token` page is shown and then press generate `JWT Token`. It will return an error 401.
 
-# JWT:
+# JWT
 We are going the create a `jwt.py` file to code all the functions related to the token.
 
 ## Install PyJWT lib:
@@ -381,7 +381,7 @@ async def get_current_user_email(token: str = Depends(oauth2_scheme)):
 
 Make sure you add your `API_SECRET_KEY` to your environment so your application can run without errors.
 
-## Return the JWT on auth/token endoing
+## Return the JWT on auth/token endpoint:
 Lets import the necessaries functions and the exception to rewrite the `/token` route.
 
 Add to the file `apps/auth.py`:
@@ -411,7 +411,7 @@ If we test the application, the `Get FastAPI JWT Token` button will print on the
 {"result":true,"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJndWlsbGVybW8ucGFvbGV0dGlAZ21haWwuY29tIiwiZXhwIjoxNjE4ODczMjgyfQ.9dbl4ylFp2BWLNAVuOwixm0IrV2lr3t7xl2YKOHgC90"}
 ```
 
-## Make the api endpoints protected
+## Make the api endpoints protected:
 Let's import the `JWT` function that we need to the file `apps/api.py`:
 
 ```python
@@ -477,11 +477,11 @@ GET http://127.0.0.1:7000/api/protected 401 (Unauthorized)
 {message: "protected api_app endpoint"}
 ```
 
-# Link to the code:
+# Link to the code
 This app is uploaded to github, you can view the repository using this [link](https://github.com/hanchon-live/tutorial-fastapi-oauth/tree/guide-2), this tutorial is the branch `guide-2`
 
 
-# Related Guides:
+# Related Guides
 The [part 1](/guides/google-login-with-fastapi/) of this tutorial explains how to create a Google Application, and how to integrate the Google OAuth with our `FastAPI` project.
 
 The [part 3](/guides/jwt-tokens-and-fastapi) of this tutorial modifies the `Tokens` to improve its functionality and usability.

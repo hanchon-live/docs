@@ -1,5 +1,5 @@
 ---
-title: "Use Google Login (OAuth) with FastAPI - Python"
+title: "Use Google Login (OAuth) with FastAPI - Python (Part 1)"
 date: 2021-04-17T12:59:30+01:00
 categories:
   - guides
@@ -20,7 +20,7 @@ We are going to allow the user to login using its Google Credentials via OAuth i
 # Requirements
 This guide assumes you already have installed in your system `python3.8` (or newer).
 
-## Setting up the environment
+## Setting up the environment:
 We need to install [FastAPI](https://fastapi.tiangolo.com/), so we are going to create a virtual environment, activate it and use `pip` to install the lib.
 We are going to use [Uvicorn](https://www.uvicorn.org/) to run the `FastAPI` app.
 
@@ -36,10 +36,10 @@ pip install uvicorn
 &nbsp;
 &nbsp;
 
-# Development:
+# Development
 After we have all the libs installed in our `virtualenv`, we can start to code.
 
-## Create a basic App
+## Create a basic App:
 The first step is to create a simple FastAPI app with a public endpoint. Let's create a `run.py` file in the root folder:
 
 File: `fastapi-googlelogin/run.py`
@@ -67,7 +67,7 @@ $ curl 127.0.0.1:7000
 {"result":"This is a public endpoint."}
 ```
 
-## Create Google Credentials
+## Create Google Credentials:
 
 To set up the credentials we are going to need a Google account.
 
@@ -104,12 +104,14 @@ Access to the Google Cloud Console with your Google account: [GoogleCloud](https
   - After creating the client, it will pop a modal with your `client ID` and `client secret`
   - {% include figure image_path="/assets/posts/google-login/google-oauth-4.png" alt="Secrets" %}
 
-## Set up OAuth in the project
+## Set up OAuth in the project:
 We are going to use libs already created for [Starlette](https://www.starlette.io/) because `FastAPI` is build on top of that.
+
 We need to install [authlib](https://github.com/lepture/authlib) in our `virtualenv` and we are going to use this lib to handle the Google Login.
+
 We need to install [itsdangerous](https://itsdangerous.palletsprojects.com/en/1.1.x/), because in the next step we are going to use `Starlette` middleware sessions that requires it.
 
-### Install the dependency
+### Install the dependency:
 
 ``` sh
 # Make sure the virtualenv is activated
@@ -118,9 +120,10 @@ pip install authlib
 pip install itsdangerous
 ```
 
-### Create the OAuth client
+### Create the OAuth client:
 
-We need the `client_id` and the `client_secret`. To avoid pushing our credentials to the server we are going to pass the values using the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. 
+We need the `client_id` and the `client_secret`. To avoid pushing our credentials to the server we are going to pass the values using the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`.
+
 To avoid running the code without this variables, we just ask if they are set and if they aren't we just stop the process.
 
 After getting the credentials in the code, we are going to register the `OAuth` client, we are going to just ask google for `openid email profile`.
@@ -150,8 +153,7 @@ oauth.register(
 ```
 
 ### Optional create a file to run the app:
-- Create a script to call the run.py file using setting the env vars. Make sure you add this file to .gitignore to avoid pushing your credentials to your repository.
-  Instructions assuming you are inside the project folder:
+- Create a script to call the `run.py` file using setting the `env vars`. Make sure you add this file to `.gitignore` to avoid pushing your credentials to your repository. Instructions assuming you are inside the project folder:
   - Create the file: `run.sh`:
     ``` sh
     source .venv/bin/activate
@@ -170,8 +172,8 @@ oauth.register(
   - If you are running `Windows`, you can set the env vars using `set` instead of `export`.
 
 
-# Create login route:
-## Add a middleware to get the session information
+# Create login route
+## Add a middleware to get the session information:
 We are going to add a session middleware in the `FastAPI` app, so AuthLib can get and use the request session.
 
 In the file: `run.py` we are going to add:
@@ -184,7 +186,7 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 ```
 Like the google credentials we use environments variables to avoid uploading our key to the repository.
 
-## OPTIONAL: Create a secret string using python
+## OPTIONAL: Create a secret string using python:
 In a terminal you can run `python3.6+` and use the `secrets` lib to generate a safe string for your middleware
 ```sh
 $ python3
@@ -197,7 +199,7 @@ It will output something like `OulLJiqkldb436-X6M11hKvr7wvLyG8TPi5PkLf4`, we can
 export SECRET_KEY=OulLJiqkldb436-X6M11hKvr7wvLyG8TPi5PkLf4
 ```
 
-## Create the endpoints
+## Create the endpoints:
 Now we need to create a `login` route so the user can enter its data. After login in with its google credential, we are going to redirect to `auth`, so we can handle the tokens.
 
 Let's create the routes on the `run.py` file:
@@ -241,10 +243,10 @@ async def logout(request: Request):
     return RedirectResponse(url='/')
 ```
 
-# Link to the code:
+# Link to the code
 This app is uploaded to github, you can view the repository using this [link](https://github.com/hanchon-live/tutorial-fastapi-oauth/tree/guide-1), this tutorial is the branch `guide-1`
 
-# Related Guides:
+# Related Guides
 The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial just uses sessions cookies for `OAuth` and to create a `JWT` token. Every other endpoint is going to use `JWT` Bearer token authentication.
 
 The [part 3](/guides/jwt-tokens-and-fastapi) of this tutorial modifies the `Tokens` to improve its functionality and usability.
