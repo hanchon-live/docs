@@ -247,6 +247,6 @@ async def logout(request: Request):
 This app is uploaded to github, you can view the repository using this [link](https://github.com/hanchon-live/tutorial-fastapi-oauth/tree/guide-1), this tutorial is the branch `guide-1`
 
 # Related Guides
-The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial just uses sessions cookies for `OAuth` and to create a `JWT` token. Every other endpoint is going to use `JWT` Bearer token authentication.
+The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial explains how to create sub-applications with `FastAPI`. It explains how to configure different `middlewares` and how to create and use `JWT` Bearer token authentication for each protected endpoints.
 
 The [part 3](/guides/jwt-tokens-and-fastapi) of this tutorial modifies the `Tokens` to improve its functionality and usability.

@@ -297,4 +297,4 @@ This frontend is going to automatically call the redirect from the Google OAuth 
 # Related Guides
 The [part 1](/guides/google-login-with-fastapi/) of this tutorial explains how to create a Google Application, and how to integrate the Google OAuth with our `FastAPI` project.
 
-The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial just uses sessions cookies for `OAuth` and to create a `JWT` token. Every other endpoint is going to use `JWT` Bearer token authentication.
+The [part 2](/guides/google-login-with-fastapi-and-jwt) of this tutorial explains how to create sub-applications with `FastAPI`. It explains how to configure different `middlewares` and how to create and use `JWT` Bearer token authentication for each protected endpoints.
