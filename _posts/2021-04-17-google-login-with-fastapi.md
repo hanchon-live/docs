@@ -7,6 +7,7 @@ tags:
   - fastapi
   - security
   - oauth
+last_modified_at: 2021-04-24T12:59:30+01:00
 ---
 We are going to allow the user to login using its Google Credentials via OAuth in our `FastAPI` project.
 

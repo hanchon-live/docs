@@ -6,6 +6,7 @@ categories:
 tags:
   - fastapi
   - vscode
+last_modified_at: 2021-04-18T22:59:30+01:00
 ---
 To debug a `FastAPI` app with `VSCode` we are going to go the debug section and create a `launch.json` file.
 {% include figure image_path="/assets/posts/debug-fast-api/debug-location.png" alt="Location" caption="" %}

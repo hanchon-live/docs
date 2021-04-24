@@ -8,6 +8,7 @@ tags:
   - python
   - terminal
   - keybindings
+last_modified_at: 2021-04-24T12:59:30+01:00
 ---
 To improve your speed when working with `VSCode` you can set custom keybindings, this is a list with my custom keyboard shortcuts.
 

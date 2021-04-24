@@ -8,6 +8,7 @@ tags:
   - security
   - oauth
   - JWT
+last_modified_at: 2021-04-24T12:59:30+01:00
 ---
 This guide is a follow up to [Use Google Login (OAuth) with FastAPI and JWT](/guides/google-login-with-fastapi-and-jwt/), in the previous guide the added to our `FastAPI` application `JWT` support.
 

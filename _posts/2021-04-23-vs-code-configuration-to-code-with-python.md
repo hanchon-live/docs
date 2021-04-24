@@ -8,6 +8,7 @@ tags:
   - python
   - pre-commit
   - fastapi
+last_modified_at: 2021-04-24T12:59:30+01:00
 ---
 To write code faster and cleaner we are going to configure `Visual Studio Code` (`VSCode`) to auto format the code when saving each file.
 
