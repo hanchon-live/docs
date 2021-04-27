@@ -10,7 +10,7 @@ tags:
   - https
   - certbot
   - debian
-last_modified_at: 2021-04-26T22:10:30+01:00
+last_modified_at: 2021-04-27T22:10:30+01:00
 ---
 In this post we are going to install and configure [nginx](https://www.nginx.com/) on an [Ubuntu](https://ubuntu.com/) or any [Debian](https://www.debian.org/) server. We are also going to use [certbot](https://certbot.eff.org/) to set the HTTPs certificate (Let's encrypt) to host our webpage only using `https`.
 
@@ -164,6 +164,16 @@ Check the configuration syntax and if everything is ok, restart `NGINX`:
 ```sh
 sudo nginx -t
 sudo systemctl restart nginx
+```
+
+NOTE: if you are using Angular builds, add this line to avoid having errors when refreshing the page.
+```
+location / {
+    root   /var/www/ethics_demo/html;
+    try_files $uri $uri/ /index.html;
+    index  index.html;
+}
+
 ```
 
 ## Use NGINX as a proxy:
