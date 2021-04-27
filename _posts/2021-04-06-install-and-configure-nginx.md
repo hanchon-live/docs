@@ -180,7 +180,7 @@ server {
 }
 ```
 
-NOTE: If you are using `FastAPI` as your API, like it was explained in previous guides, you may want to add your `root_path` to the `FastAPI` constructor: `app = FastAPI(root_path='/api/')`. This will allow you to access to the `/docs` (Swagger) endpoint.
+NOTE: If you are using `FastAPI` as your API, like it was explained in previous guides, you may must to add your `root_path` to the `FastAPI` constructor: `app = FastAPI(root_path='/api')`.
 
 # Certificates
 We are going to use `certbot` to create, install and renew free certificates (**Let's Encrypt**).
