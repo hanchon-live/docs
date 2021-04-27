@@ -17,7 +17,7 @@ In this post we are going to install and configure [nginx](https://www.nginx.com
 {% include toc icon="cog" title="Content" %}
 {% include figure image_path="/assets/posts/nginx/header.png" alt="NGINX ubuntu certbot and let's encrypt - keybindings" caption="" %}
 # NGINX
-## Installation
+## Installation:
 We can use `apt` to install the web server.
 
 NOTE: make sure you don't have anything running on the port `80`, to avoid restarting the server after the installation.
@@ -29,7 +29,7 @@ sudo apt install nginx
 
 If you have a firewall, you should set your rules after this step.
 
-## Check the server status
+## Check the server status:
 To check the status we can just run:
 ```sh
 systemctl status nginx
@@ -58,7 +58,7 @@ Apr 26 22:14:56 burninstone-new systemd[1]: Started A high performance web serve
 If the server is **active** (running), everything is correct. You can check it in any browser using the url `http://your-ip`
 
 
-## Useful commands
+## Useful commands:
 - **Stop** the web server:
 ``` sh
 sudo systemctl stop nginx
@@ -84,7 +84,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-## Create an index.html
+## Create an index.html:
 We are going to configure our server to host an index file.
 
 This guide is going to use `your_domain` as an example, but you should replace that variable with your own domain.
@@ -126,7 +126,7 @@ sudo vim /var/www/your_domain/html/index.html
 </html>
 ```
 
-## Configure your domain
+## Configure your domain:
 NOTE: In every step change the `your_domain` value.
 
 Let's start creating a new file with the configuration for our domain.
@@ -166,7 +166,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-## Use NGINX as a proxy
+## Use NGINX as a proxy:
 We can configure our webserver to redirect the request to another endpoint, for example an application running locally in our server:
 ```
 server {
