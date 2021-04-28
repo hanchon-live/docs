@@ -8,7 +8,7 @@ tags:
   - security
   - oauth
   - JWT
-last_modified_at: 2021-04-24T12:59:30+01:00
+last_modified_at: 2021-04-28T09:00:30+01:00
 ---
 This guide is a follow up to [Use Google Login (OAuth) with FastAPI - Python](/guides/google-login-with-fastapi/), in the previous guide We allowed the user to login using its Google Credentials via OAuth in our `FastAPI` project. 
 
@@ -138,7 +138,21 @@ We need to modify the authorized domains because now we are going to redirect to
 
 This `/token` url it's a frontend route. We are going to redirect the user after entering the google credentials to the frontend, and then pass it to the server to validate the response (using javascript).
 
-The frontend can be hosted on any domain, we just need to change the url in this section and make the host available on a `CORSMiddleware` on the `FastAPI` app.
+The frontend can be hosted on any domain, we just need to change the url in this section and make the host available on a `CORSMiddleware` on the `FastAPI` app:
+
+``` python
+from fastapi.middleware.cors import CORSMiddleware
+
+ALLOWED_HOSTS = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_HOSTS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+```
 
 
 ## Move the run.py code to app/auth.py:
