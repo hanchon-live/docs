@@ -61,7 +61,8 @@ Queremos darle estilo al p que viene creado por defecto en nuestro App.js en el 
 Para ello tenemos que importar styled from 'styled-components' y luego definirnos una constante con el estilo que queramos dar.
 IMPORTANTE. esta constante tiene que empezar con mayuscula, sino no se hara el reemplazo.
 A esa constante le asignamos styled seguido de . y el tag al que quiera dar estilo. Lo siguiente
-es un string, asi que lo ponemos entre `` y {}. Aqui adentro definimos todo el css que queramos aplicar                       
+es un string, asi que lo ponemos entre `` y {}. Aqui adentro definimos todo el css que queramos aplicar.
+Las constantes con estilos las definimos luego de los imports y antes de la def de la funcion / clase.     
 
 The first step is to create a simple FastAPI app with a public endpoint. Let's create a `run.py` file in the root folder:
 
@@ -91,12 +92,99 @@ Lo implementamos de esta forma si son tags de html: divs, section, p, a, h1, etc
 
 Pero que pasa si queremos darle un estilo a un componente de react, por ejemplo uno de boostrap?
 
-primero tenemos que tener instalada la liberia https://react-bootstrap.github.io/
+primero tenemos que instalar la liberia https://react-bootstrap.github.io/
 
-```
+``` javascript
 yarn add react-boostrap
 
 ```
+Luego tenemos que importar el comonponente que queramos utilizar y darle estilo. 
+
+
+``` javascript
+import { Button } from 'react-bootstrap'
+
+```
+Una vez que lo importamos vamos a crear el boton y darle estilo. El proceso es muy parecido al de los tags
+pero en vez de escribir .<tag>, omitiremos el punto y pondremos el componente entre ().
+
+``` javascript
+import styled from 'styled-components'
+import { Button } from 'react-bootstrap'
+const StyledButton = styled(Button)`{
+        background-color: green;
+    }`
+```
+We have this initial code
+``` html
+     <Button>This is a button</Button>
+
+ ```
+ to apply the style we simply change "Button" for our styled constant. 
+
+ ``` html
+         <StyledButton >This is a button</StyledButton>
+```
+
+y si queremos darle estilo a un componente nuestro ? Es lo mismo!
+Supongamos que tenemos un componente ComponentTest creado en nuestra
+carpeta de components, el cual retorna un h1 con un estilo propio. 
+
+``` javascript
+import React from 'react'
+import styled from 'styled-components'
+
+
+const StyledH1 = styled.h1`{
+    color: blue;
+  }`
+  
+
+export class ComponentTest extends React.Component{
+  render(){
+    return (<StyledH1>{this.props.text}</StyledH1>)
+  }
+}
+
+```
+Ahora supongamos que para este caso de uso especifico necesitamos, a su vez, que el bg sea negro.
+Para esto tenemos que definirnos en nuestro App.js una nueva constante con este estilo. Para aplicarle estilos 
+a nuestros compomentes, primero los
+importamos y luego lo hacemos de la misma forma que con los de bootstrap entre ().
+
+``` javascript
+import { ComponentTest } from './components/ComponentTest'
+
+const StyledComponentTest = styled(ComponentTest)`{
+  background-color: white;
+}`
+```
+
+Lo que nos queda es llamar a nuestro componente en nuestro codigo y darle este formato
+
+``` html
+        <StyledComponentTest text="This is a header 1" />
+```
+Si se fijan, los aplica el estilo del color amarillo, pero no nos aplica el de bg white. Que nos esta faltando?
+En el ComponentTest tenemos que definirle el className.
+
+```javascript
+export class ComponentTest extends React.Component{
+    render(){
+      return (<StyledH1 className={this.props.className}>{this.props.text}</StyledH1>)
+    }
+  }
+```
+
+
+
+
+
+
+
+
+
+
 
 We can run the app with `python ./run.py` (Make sure you have the `virtualenv` activated).
 
