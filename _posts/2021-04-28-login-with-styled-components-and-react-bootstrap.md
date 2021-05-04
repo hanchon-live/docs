@@ -115,7 +115,7 @@ ReactDOM.render(
 );
 ```
 Great! Now we see "This a paragraph" in our browser! 
-
+{% include figure image_path="/assets/posts/login-page/paragraph.jpeg" alt="this is a paragraph image" caption="" %}
 ## Create content with react-bootstrap:
 
 We managed to show the paragraph in our browser but we don't want to see that. We want to have our login page here. 
@@ -198,6 +198,9 @@ export class LoginPage extends React.Component{
 }
 ```
 
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/first-col-with-Image.jpeg" alt="first col with logo" caption="" %}
+
 Now we want to create our h1 and button for our right column. We are going to use `Button` from react-bootstrap
 
 ``` javascript
@@ -220,6 +223,8 @@ export class LoginPage extends React.Component{
     }
 }
 ```
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/second-col-with-content.jpeg" alt="second col with content" caption="" %}
 
 ## Create styles with styled-components:
 
@@ -267,6 +272,10 @@ export class LoginPage extends React.Component{
     }
 }
 ```
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/styledRow.jpeg" alt="styled Row" caption="" %}
+
+
 Let's create the style for our image. 
 ```javascript
 const StyledImage = styled(Image)`{
@@ -303,6 +312,8 @@ const StyledH1 = styled.h1`{
 
 <StyledH1>Welcome!</StyledH1>
 ```
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/h1-with-style.jpeg" alt="h1 with style" caption="" %}
 
 ### Style pseudo-clases with styled-components: 
 
@@ -318,6 +329,10 @@ const StyledButton = styled(Button)`{
 }`
  <StyledButton>Login</StyledButton>
 ```
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/styled-button.jpeg" alt="style for button" caption="" %}
+
+
 As you can see, if you put your mouse above the button, the hover action display a background color blue, but we don't want that. We want that on hover, active and focus the background color is a light gray.
 This is an example of pseudo classes:
 
@@ -338,6 +353,9 @@ const StyledButton = styled(Button)`{
     }
 }`
 ```
+
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/button-with-hover-activated.jpeg" alt="button with pseudo classes styled" caption="" %}
 
 ### Add icons from font-awesome:
 
@@ -382,6 +400,9 @@ const StyledButton = styled(Button)`{
     }
 }`
 ```
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/button-with-fontAwesome-icon.jpeg" alt="button with font awesome icon styled" caption="" %}
+
 ### Add responsive breakpoints in our styled components:
 
 When we are in mobile, our logo is pretty big. We should give it a smaller width for this case. In our StyledImage we have to add @media. You have to write these specifications from highest to lowest.
@@ -396,6 +417,8 @@ const StyledImage = styled(Image)`{
   }
 }`
 ```
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/image-responsive.jpeg" alt="image responsive" caption="" %}
 
 ### Reusing components with same styles: 
 
@@ -558,6 +581,10 @@ export class LoginPage extends React.Component{
     }
 }
 ```
+
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/space-between-components.jpeg" alt="space between components" caption="" %}
+
 ### Show style depending of condition from properties: 
 
 The last thing we are going to see if what happens if we want to style a component depenending of the condition of a propertie.
@@ -611,3 +638,6 @@ export class ImageWithStyle extends React.Component{
     }
 }
 ```
+
+In the Browser we should see something like this:
+{% include figure image_path="/assets/posts/login-page/background-for-some-images.jpeg" alt="background-for-some-images" caption="" %}
