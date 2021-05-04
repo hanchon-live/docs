@@ -1,5 +1,5 @@
 ---
-title: "Login with styled components and react bootstrap"
+title: "Landing page with styled-components and react-bootstrap"
 date: 2021-04-24T22:10:30+01:00
 categories:
   - guides
@@ -10,21 +10,21 @@ tags:
 last_modified_at: 2021-04-28T12:59:30+01:00
 ---
 
-We are going to create a **Login page** using [react-bootstrap](https://react-bootstrap.github.io/) components and [styled-components](https://styled-components.com/).
+We are going to create a **Landing page** using [react-bootstrap](https://react-bootstrap.github.io/) components and [styled-components](https://styled-components.com/).
 
-{% include figure image_path="/assets/posts/login-page/header.png" alt="React bootstrap styled components" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/header.png" alt="React bootstrap styled components" caption="" %}
 {% include toc icon="cog" title="Content" %}
 
 
 # Requirements
 This guide assumes you already have installed in your system [node v.15.14.0](https://github.com/nvm-sh/nvm) or newer.
 
-## Setting up the environment:
-We have to create a new `react-app` for our login page.
+# Setting up the environment
+We have to create a new `react-app` for our landing page.
 
 ``` sh
-mkdir styled-components-loginPage
-cd styled-components-loginPage
+mkdir styled-components-landingPage
+cd styled-components-landingPage
 yarn create react-app my-app
 cd my-app
 yarn start
@@ -33,11 +33,11 @@ After running `yarn start` a new browser window will be opened with your project
 &nbsp;
 &nbsp;
 
-## Create a basic login page:
-### Create the LoginPage file:
+# Create a basic landing page
+## Create the LandingPage file:
 After running `yarn create react-app` your folder should look like this:
 
-{% include figure image_path="/assets/posts/login-page/login-tree-start.jpeg" alt="initial login tree" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/landing-tree-start.jpeg" alt="initial landing tree" caption="" %}
 
 Let's start creating a new folder for all our components:
 
@@ -46,13 +46,13 @@ cd src
 mkdir components
 ```
 
-Inside our `components` folder create a `LoginPage.js` file. We are capitalizing this file name, so it matches the `JavaScript` class that we are going to create.
+Inside our `components` folder create a `LandingPage.js` file. We are capitalizing this file name, so it matches the `JavaScript` class that we are going to create.
 
 The project should look something like this:
 
-{% include figure image_path="/assets/posts/login-page/tree-with-login-page-created.jpeg" alt="tree with login page created" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/tree-with-landing-page-created.jpeg" alt="tree with landing page created" caption="" %}
 
-### Call our LoginPage instead of the example App:
+## Call our LandingPage instead of the example App:
 The `index.js` file should have this code:
 
 ``` javascript
@@ -66,32 +66,32 @@ ReactDOM.render(
 
 Index is calling the method `render` from `ReactDOM`. This method set the `html` code for the element with the id `root`. 
 
-The example just renders the component called `App`, we don't want to render `<App />`, we want it to render `<LoginPage />` to test our project.
+The example just renders the component called `App`, we don't want to render `<App />`, we want it to render `<LandingPage />` to test our project.
 
 So we have to change it:
 
 ``` javascript
 ReactDOM.render(
   <React.StrictMode>
-    <LoginPage />
+    <LandingPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
 ```
 
-If you check our project in the browser, you may think that it'll render a blank page because the `LoginPage.js` file is empty.
+If you check our project in the browser, you may think that it'll render a blank page because the `LandingPage.js` file is empty.
 
 React checks if everything is ok when is trying to compile the code, so it'll tell us that our component is not defined:
 
-{% include figure image_path="/assets/posts/login-page/failed-to-compile-login-page.jpeg" alt="failed to compile login page" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/failed-to-compile-landing-page.jpeg" alt="failed to compile landing page" caption="" %}
 
-### Creating a react component:
+## Creating a react component:
 
-Let's fix the last error, in `LoginPage.js` define the new component:
+Let's fix the last error, in `LandingPage.js` define the new component:
 
 ```javascript
 import React from 'react'
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return()
     }
@@ -104,37 +104,37 @@ The content that we want to display in the browser must be the `return` of the `
 For example, let's render a simply paragraph with the text *This is a paragraph*.
 
 ``` react
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(<p>This is a paragraph</p>)
     }
 }
 ```
 
-### Use a react component:
+## Use a react component:
 
 To import this component in the `index.js` file, just a line should be added.
 
-In `index.js` the `LoginPage` is imported using relative paths.
+In `index.js` the `LandingPage` is imported using relative paths.
 
 ```javascript
-import { LoginPage } from './components/LoginPage'
+import { LandingPage } from './components/LandingPage'
 ReactDOM.render(
   <React.StrictMode>
-    <LoginPage />
+    <LandingPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
 ```
 Great! Now we see "This a paragraph" in our browser! 
-{% include figure image_path="/assets/posts/login-page/paragraph.png" alt="this is a paragraph image" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/Screenshot from 2021-05-04 17-15-22.png" alt="this is a paragraph image" caption="" %}
 
-## Create content with react-bootstrap:
+# Create content with react-bootstrap
 
-We managed to show the paragraph in our browser but we don't want to see that. We want to have our login page here. 
-For that, we are going to create a simply structure. One row with two columns. In the left side, we are going to show our icon page. In the right side, we are going to have a h1 with a button that allows us to login.
+We managed to show the paragraph in our browser but we don't want to see that. We want to have our landing page here. 
+For that, we are going to create a simply structure. One row with two columns. In the left side, we are going to show our icon page. In the right side, we are going to have a h1 with a button that allows us to landing.
 
-As we are using react, the best way to create our login page is using `react-boostrap` components. Let's install `react-bootstrap` (https://react-bootstrap.github.io/). If you are running your project, you will have to press control + C to stop it and then write in you folder project this command 
+As we are using react, the best way to create our landing page is using `react-boostrap` components. Let's install `react-bootstrap` (https://react-bootstrap.github.io/). If you are running your project, you will have to press control + C to stop it and then write in you folder project this command 
 
 ```sh
 yarn add react-bootstrap bootstrap
@@ -151,13 +151,13 @@ We have to add the following link in the index.html file that is in public folde
     />  
 ```
 
-Now that we have all installed we can create our row with two columns in our return statment, in LoginPage.js. For that we have to import `Row` and `Col` components from `react-bootstrap`
+Now that we have all installed we can create our row with two columns in our return statment, in LandingPage.js. For that we have to import `Row` and `Col` components from `react-bootstrap`
 
 ```javascript
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
           <Row>
@@ -173,13 +173,13 @@ Now we have to write our content for the columns. Let's start with the first one
 case I am going to put our logo.
 
 As we are going to start putting images in our project, we should create a folder for these ones. 
-{% include figure image_path="/assets/posts/login-page/tree-images-folder.jpeg" alt="tree images folder" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/tree-images-folder.jpeg" alt="tree images folder" caption="" %}
 
 As we want to show this image in our Col, we should use the `Image` component from react-bootstrap. Remember to import it 
 ```javascript
 import Image from 'react-bootstrap/Image'
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <Row>
@@ -197,7 +197,7 @@ We have to put the src for the image. As we have the image in our folder, we hav
 ```javascript
 import logo from '../images/logo.png'
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <Row>
@@ -212,14 +212,14 @@ export class LoginPage extends React.Component{
 ```
 
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/first-col-with-Image.jpeg" alt="first col with logo" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/first-col-with-Image.jpeg" alt="first col with logo" caption="" %}
 
 Now we want to create our h1 and button for our right column. We are going to use `Button` from react-bootstrap
 
 ``` javascript
 import Button from 'react-bootstrap/Button'
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <Row>
@@ -237,7 +237,7 @@ export class LoginPage extends React.Component{
 }
 ```
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/second-col-with-content.jpeg" alt="second col with content" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/second-col-with-content.jpeg" alt="second col with content" caption="" %}
 
 ## Create styles with styled-components:
 
@@ -269,7 +269,7 @@ const StyledRow = styled(Row)`{
 Now we have to assign this constant to the actual component that we want to style. So we replace Row for StyledRow. 
 
 ```javascript
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <StyledRow>
@@ -286,7 +286,7 @@ export class LoginPage extends React.Component{
 }
 ```
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/styledRow.jpeg" alt="styled Row" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/styledRow.jpeg" alt="styled Row" caption="" %}
 
 
 Let's create the style for our image. 
@@ -297,7 +297,7 @@ const StyledImage = styled(Image)`{
     width: 200px;
 }`
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <StyledRow>
@@ -326,7 +326,7 @@ const StyledH1 = styled.h1`{
 <StyledH1>Welcome!</StyledH1>
 ```
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/h1-with-style.jpeg" alt="h1 with style" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/h1-with-style.jpeg" alt="h1 with style" caption="" %}
 
 ### Style pseudo-clases with styled-components: 
 
@@ -343,7 +343,7 @@ const StyledButton = styled(Button)`{
  <StyledButton>Login</StyledButton>
 ```
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/styled-button.jpeg" alt="style for button" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/styled-button.jpeg" alt="style for button" caption="" %}
 
 
 As you can see, if you put your mouse above the button, the hover action display a background color blue, but we don't want that. We want that on hover, active and focus the background color is a light gray.
@@ -368,7 +368,7 @@ const StyledButton = styled(Button)`{
 ```
 
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/button-with-hover-activated.jpeg" alt="button with pseudo classes styled" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/button-with-hover-activated.jpeg" alt="button with pseudo classes styled" caption="" %}
 
 ### Add icons from font-awesome:
 
@@ -414,7 +414,7 @@ const StyledButton = styled(Button)`{
 }`
 ```
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/button-with-fontAwesome-icon.jpeg" alt="button with font awesome icon styled" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/button-with-fontAwesome-icon.jpeg" alt="button with font awesome icon styled" caption="" %}
 
 ### Add responsive breakpoints in our styled components:
 
@@ -431,7 +431,7 @@ const StyledImage = styled(Image)`{
 }`
 ```
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/image-responsive.jpeg" alt="image responsive" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/image-responsive.jpeg" alt="image responsive" caption="" %}
 
 ### Reusing components with same styles: 
 
@@ -440,7 +440,7 @@ We want to use some of the properties that we add in StyledImage, but not all of
 In these cases we should create a new component so we can reuse the properties.
 Let's create a new component in our components folder.
 
-{% include figure image_path="/assets/posts/login-page/tree-with-image-with-style.jpeg" alt="tree with component image with style" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/tree-with-image-with-style.jpeg" alt="tree with component image with style" caption="" %}
 
 In this component we are going to write all the information that is the same for all the images that we are going to create. 
 
@@ -475,13 +475,13 @@ export class ImageWithStyle extends React.Component{
     }
 }
 ```
-In our LoginPage we deleted all the information that we are using now in ImageWithStyle.
-How we use <ImageWithStyle /> in LoginPage.js? We have to import it and call it where we want to!
+In our LandingPage we deleted all the information that we are using now in ImageWithStyle.
+How we use <ImageWithStyle /> in LandingPage.js? We have to import it and call it where we want to!
 
 ```javascript
 import { ImageWithStyle } from "../components/ImageWithStyle"
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <StyledRow>
@@ -513,7 +513,7 @@ const StyledLogoStyledComp = styled(ImageWithStyle)`{
     width:80px;
 }`
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <StyledRow>
@@ -539,7 +539,7 @@ For the first one, we already had imported logo, and I added logoStyledComponent
 ```javascript
 import logo from '../images/logo.png'
 import logoStyledComponent from '../images/logoStyledComponents.png'
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <StyledRow>
@@ -571,7 +571,7 @@ const RightColumnSpaces = styled.div`{
     margin-bottom: 1rem;
 }`
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     render(){
         return(
         <StyledRow>
@@ -596,15 +596,15 @@ export class LoginPage extends React.Component{
 ```
 
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/space-between-components.jpeg" alt="space between components" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/space-between-components.jpeg" alt="space between components" caption="" %}
 
 ### Show style depending of condition from properties: 
 
 The last thing we are going to see if what happens if we want to style a component depenending of the condition of a propertie.
-Let's suppose that we want that some images in our loginPage have the same background and others don't. We can create a propertie backgroundImage in the constructor of our LoginPage, and set it to true. Then, when we call our component ImageWithStyle like this or instance with style, we can give this propertie as parameter. 
+Let's suppose that we want that some images in our landingPage have the same background and others don't. We can create a propertie backgroundImage in the constructor of our LandingPage, and set it to true. Then, when we call our component ImageWithStyle like this or instance with style, we can give this property as parameter. 
 
 ```javascript
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     constructor(props){
         super(props);
         this.backgroundImage = true;
@@ -653,4 +653,4 @@ export class ImageWithStyle extends React.Component{
 ```
 
 In the Browser we should see something like this:
-{% include figure image_path="/assets/posts/login-page/background-for-some-images.jpeg" alt="background-for-some-images" caption="" %}
+{% include figure image_path="/assets/posts/landing-page/background-for-some-images.jpeg" alt="background-for-some-images" caption="" %}
