@@ -1,6 +1,6 @@
 We are going to use the loginPage example and add routes.
 
-You can clone the reporsitory or keep working in your project.
+You can clone the repository or keep working in your project.
 
 We are going to create a new component, called Dashboard, so we can move through pages. 
 You will have something like this: 

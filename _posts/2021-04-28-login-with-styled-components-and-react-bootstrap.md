@@ -1,6 +1,6 @@
 ---
 title: "Login with styled components and react bootstrap"
-date: 2021-04-17T12:59:30+01:00
+date: 2021-04-24T22:10:30+01:00
 categories:
   - guides
 tags:
@@ -10,13 +10,17 @@ tags:
 last_modified_at: 2021-04-28T12:59:30+01:00
 ---
 
-We are going to create a login page using `react bootstrap` components and providing the style with the lib `styled-components`
+We are going to create a **Login page** using [react-bootstrap](https://react-bootstrap.github.io/) components and [styled-components](https://styled-components.com/).
+
+{% include figure image_path="/assets/posts/login-page/header.png" alt="React bootstrap styled components" caption="" %}
+{% include toc icon="cog" title="Content" %}
+
 
 # Requirements
-This guide assumes you already have installed in your system `node v.15.14.0` or newer.
+This guide assumes you already have installed in your system [node v.15.14.0](https://github.com/nvm-sh/nvm) or newer.
 
 ## Setting up the environment:
-We have to create a new react project for our login page.
+We have to create a new `react-app` for our login page.
 
 ``` sh
 mkdir styled-components-loginPage
@@ -25,22 +29,31 @@ yarn create react-app my-app
 cd my-app
 yarn start
 ```
-Yarn start is going to open a browser window and show you the content of your project. 
+After running `yarn start` a new browser window will be opened with your project. 
 &nbsp;
 &nbsp;
 
 ## Create a basic login page:
-The first step is to create our login page in our project. 
-As you can see, my app has these files created. 
+### Create the LoginPage file:
+After running `yarn create react-app` your folder should look like this:
 
 {% include figure image_path="/assets/posts/login-page/login-tree-start.jpeg" alt="initial login tree" caption="" %}
 
-LoginPage is going to be a component in our project. So we are going to create a folder called components in our src folder. Then we create inside components our login page file. 
-As this file is going to have js extension, the first letter of the name has to be capitalize. We have to see something like this:
+Let's start creating a new folder for all our components:
+
+``` sh 
+cd src
+mkdir components
+```
+
+Inside our `components` folder create a `LoginPage.js` file. We are capitalizing this file name, so it matches the `JavaScript` class that we are going to create.
+
+The project should look something like this:
 
 {% include figure image_path="/assets/posts/login-page/tree-with-login-page-created.jpeg" alt="tree with login page created" caption="" %}
 
-In index.js you can see that we have 
+### Call our LoginPage instead of the example App:
+The `index.js` file should have this code:
 
 ``` javascript
 ReactDOM.render(
@@ -50,10 +63,12 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-Index is calling the method render from ReactDOM, and is going to render in root what we tell him to render, in this case <App />.
-But we don't want that root renders <App />, we want it to render <LoginPage />.
 
-So we have to change it
+Index is calling the method `render` from `ReactDOM`. This method set the `html` code for the element with the id `root`. 
+
+The example just renders the component called `App`, we don't want to render `<App />`, we want it to render `<LoginPage />` to test our project.
+
+So we have to change it:
 
 ``` javascript
 ReactDOM.render(
@@ -63,47 +78,44 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-Look in your browser what is showing. You should see a blank page because we don't have content in our LoginPage.js
 
-If we did it like this, you should see this error in your browser
+If you check our project in the browser, you may think that it'll render a blank page because the `LoginPage.js` file is empty.
+
+React checks if everything is ok when is trying to compile the code, so it'll tell us that our component is not defined:
+
 {% include figure image_path="/assets/posts/login-page/failed-to-compile-login-page.jpeg" alt="failed to compile login page" caption="" %}
 
-Why is that? Because we created our LoginPage.js but index.js doesn't know that this page exist. 
+### Creating a react component:
 
-Let's fix this.
-In LoginPage.js we have to define our component. 
+Let's fix the last error, in `LoginPage.js` define the new component:
 
 ```javascript
 import React from 'react'
-class LoginPage extends React.Component{
+export class LoginPage extends React.Component{
     render(){
         return()
     }
 }
 ```
-In the return we are going to write what we what to show. Just to see something in our browser, let's render a simply paragraph with the text "This is a paragraph"
+*NOTE: The class must be `exported` by adding the `export` word before `class`, so it can be used by the `index.js` file.*
 
-```javascript
-class LoginPage extends React.Component{
-    render(){
-        return(<p>This is a paragraph</p>)
-    }
-}
-```
+The content that we want to display in the browser must be the `return` of the `render` function.
 
-If you tried to see this text in the browser, you can see that still is showing the same error. 
-We have to do two more steps. First we have to export LoginPage class, so other files can use it.
-We only have to add the word export before class
+For example, let's render a simply paragraph with the text *This is a paragraph*.
 
-```javascript
+``` react
 export class LoginPage extends React.Component{
     render(){
         return(<p>This is a paragraph</p>)
     }
 }
 ```
-Then we have to import this component where we want to use it, in our case is index.js.
-In index.js we have to see something like this:
+
+### Use a react component:
+
+To import this component in the `index.js` file, just a line should be added.
+
+In `index.js` the `LoginPage` is imported using relative paths.
 
 ```javascript
 import { LoginPage } from './components/LoginPage'
@@ -115,7 +127,8 @@ ReactDOM.render(
 );
 ```
 Great! Now we see "This a paragraph" in our browser! 
-{% include figure image_path="/assets/posts/login-page/paragraph.jpeg" alt="this is a paragraph image" caption="" %}
+{% include figure image_path="/assets/posts/login-page/paragraph.png" alt="this is a paragraph image" caption="" %}
+
 ## Create content with react-bootstrap:
 
 We managed to show the paragraph in our browser but we don't want to see that. We want to have our login page here. 
