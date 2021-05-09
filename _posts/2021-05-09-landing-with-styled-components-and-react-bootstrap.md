@@ -1,13 +1,13 @@
 ---
 title: "Landing page with styled-components and react-bootstrap"
-date: 2021-04-24T22:10:30+01:00
+date: 2021-05-09T22:17:30+01:00
 categories:
   - guides
 tags:
   - styled-components
   - react-bootstrap
   - react
-last_modified_at: 2021-04-28T12:59:30+01:00
+last_modified_at: 2021-05-09T22:17:30+01:00
 ---
 
 We are going to create a **Landing page** using [react-bootstrap](https://react-bootstrap.github.io/) components and [styled-components](https://styled-components.com/).
@@ -35,11 +35,8 @@ After running `yarn start` a new browser window will be opened with your project
 
 # Create a basic landing page
 ## Create the LandingPage file:
-After running `yarn create react-app` your folder should look like this:
 
-{% include figure image_path="/assets/posts/landing-page/landing-tree-start.jpeg" alt="initial landing tree" caption="" %}
-
-Let's start creating a new folder for all our components:
+After running `yarn create react-app`, let's start creating a new folder for all our components:
 
 ``` sh 
 cd src
@@ -48,9 +45,10 @@ mkdir components
 
 Inside our `components` folder create a `LandingPage.js` file. We are capitalizing this file name, so it matches the `JavaScript` class that we are going to create.
 
-The project should look something like this:
-
-{% include figure image_path="/assets/posts/landing-page/tree-with-landing-page-created.jpeg" alt="tree with landing page created" caption="" %}
+``` sh 
+cd components
+touch LandingPage.js
+```
 
 ## Call our LandingPage instead of the example App:
 The `index.js` file should have this code:
@@ -66,7 +64,7 @@ ReactDOM.render(
 
 Index is calling the method `render` from `ReactDOM`. This method set the `html` code for the element with the id `root`. 
 
-The example just renders the component called `App`, we don't want to render `<App />`, we want it to render `<LandingPage />` to test our project.
+The example just renders the component called `App`. We don't want to render `<App />`, we want it to render `<LandingPage />` to test our project.
 
 So we have to change it:
 
@@ -130,17 +128,15 @@ Great! Now we see "This a paragraph" in our browser!
 {% include figure image_path="/assets/posts/landing-page/Screenshot from 2021-05-04 17-15-22.png" alt="this is a paragraph image" caption="" %}
 
 # Create content with react-bootstrap
+## Install react-bootstrap
 
-We managed to show the paragraph in our browser but we don't want to see that. We want to have our landing page here. 
-For that, we are going to create a simply structure. One row with two columns. In the left side, we are going to show our icon page. In the right side, we are going to have a h1 with a button that allows us to landing.
-
-As we are using react, the best way to create our landing page is using `react-boostrap` components. Let's install `react-bootstrap` (https://react-bootstrap.github.io/). If you are running your project, you will have to press control + C to stop it and then write in you folder project this command 
+Let's create the content for the landing page instead of the paragraph: one `row` with two `columns`. In the first column, we are going to show a logo. In the second one, a h1 with a button that allows us to login.
+For that, let's install [react-bootstrap](https://react-bootstrap.github.io/)
 
 ```sh
 yarn add react-bootstrap bootstrap
 ```
-
-We have to add the following link in the index.html file that is in public folder. Or we have to add the bootstrap.css in our project.
+And add the following link in `index.html` (this file is in `public folder`).
 
 ```html 
     <link
@@ -150,8 +146,10 @@ We have to add the following link in the index.html file that is in public folde
       crossorigin="anonymous"
     />  
 ```
+## Create components with react-bootstrap
+### Add Row and Col components
 
-Now that we have all installed we can create our row with two columns in our return statment, in LandingPage.js. For that we have to import `Row` and `Col` components from `react-bootstrap`
+To create these components in the `LoginPage.js` file, we only have to import them from `react-bootstrap` and add them in the return statment. 
 
 ```javascript
 import Row from 'react-bootstrap/Row'
@@ -168,14 +166,16 @@ export class LandingPage extends React.Component{
     }
 }
 ```
+### Add Image component
 
-Now we have to write our content for the columns. Let's start with the first one. In my
-case I am going to put our logo.
+Let's add the logo in the first column. First, let's create an images folder for our project.
 
-As we are going to start putting images in our project, we should create a folder for these ones. 
-{% include figure image_path="/assets/posts/landing-page/tree-images-folder.jpeg" alt="tree images folder" caption="" %}
+```sh
+cd ..
+mkdir images
+```
+For `images`, `react-bootstrap` has a specific component. 
 
-As we want to show this image in our Col, we should use the `Image` component from react-bootstrap. Remember to import it 
 ```javascript
 import Image from 'react-bootstrap/Image'
 
@@ -192,7 +192,7 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-We have to put the src for the image. As we have the image in our folder, we have to import it and call it.
+Let's import the image logo. In `src`, the logo has to be called between `{}` (that way the code can read the value for the variable)
 
 ```javascript
 import logo from '../images/logo.png'
@@ -211,10 +211,12 @@ export class LandingPage extends React.Component{
 }
 ```
 
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/first-col-with-Image.jpeg" alt="first col with logo" caption="" %}
 
-Now we want to create our h1 and button for our right column. We are going to use `Button` from react-bootstrap
+### Add Button component
+
+Let's add the h1 and button in the second column. Let's add the `button` component from `react-bootstrap`.
 
 ``` javascript
 import Button from 'react-bootstrap/Button'
@@ -236,25 +238,29 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/second-col-with-content.jpeg" alt="second col with content" caption="" %}
 
-## Create styles with styled-components:
+## Create styles with styled-components
 
-### Install lib styled-components:
+### Install lib styled-components
 
-Now that we have our content, we want to give it some style! 
-We are going to install `styled-components` lib `(https://styled-components.com/)
+Let's install [styled-components](https://styled-components.com/) to style the content.
 
 ``` sh
 yarn add styled-components
 ```
-### Style components from react-bootstrap: 
 
-We are going to center all the content vertically and horizontally. For this task we have to style Row component. 
-First of all we have to import `styled` from 'styled-components'
-Then we are going to create a constant with the first letter capitalize (if not the lib is not going to change that constant for the Row and it's not going to show the style in the browser). We assign to this constant styled(Row). We have to write it this way because we are styling a component. Then, as a string and in curly braces, we write the styles like css.
-We write this constant outside of the class component to have separate funcionallity from styles. 
+### Style Row with styled-components
+
+Let's center the content of the `row` vertically and horizontally. 
+
+- Import `styled` from 'styled-components'
+
+```javascrtipt
+import styled from 'styled-components'
+```
+- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
 
 ```javascript
 const StyledRow = styled(Row)`{
@@ -265,8 +271,9 @@ const StyledRow = styled(Row)`{
     margin: 0;
 }`
 ```
+*NOTE: The code inside `styled` has to represent the component. It could be a `html element` or a `react component`.*
 
-Now we have to assign this constant to the actual component that we want to style. So we replace Row for StyledRow. 
+- Replace the `component` for the constant created.
 
 ```javascript
 export class LandingPage extends React.Component{
@@ -285,11 +292,16 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/styledRow.jpeg" alt="styled Row" caption="" %}
 
+### Style Image with styled-components
 
 Let's create the style for our image. 
+
+- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
+
+
 ```javascript
 const StyledImage = styled(Image)`{
     max-width: 100%;
@@ -313,9 +325,10 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-### Style tags with styled-components: 
+### Style html elements with styled-components
 
-Now let's style our h1. We have to write it a little different. H1 is a <tag> so for these cases after the word styled we write a dot and the tag that we want to style. Let's see an example. 
+- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
+As the code inside styled is an html elment, we write it with a dot.
 
 ``` javascript 
 const StyledH1 = styled.h1`{
@@ -325,12 +338,12 @@ const StyledH1 = styled.h1`{
 
 <StyledH1>Welcome!</StyledH1>
 ```
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/h1-with-style.jpeg" alt="h1 with style" caption="" %}
 
-### Style pseudo-clases with styled-components: 
+### Style pseudo-classes with styled-components: 
 
-For our button it's the same case as the Row or Image. 
+- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
 
 ```javascript
 const StyledButton = styled(Button)`{
@@ -342,12 +355,10 @@ const StyledButton = styled(Button)`{
 }`
  <StyledButton>Login</StyledButton>
 ```
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/styled-button.jpeg" alt="style for button" caption="" %}
 
-
-As you can see, if you put your mouse above the button, the hover action display a background color blue, but we don't want that. We want that on hover, active and focus the background color is a light gray.
-This is an example of pseudo classes:
+The `hover` action displays a blue background. Let's apply a light gray color to the pseudo classes `hover`, `active` and `focus`.
 
 ``` javascript
 const StyledButton = styled(Button)`{
@@ -367,12 +378,14 @@ const StyledButton = styled(Button)`{
 }`
 ```
 
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/button-with-hover-activated.jpeg" alt="button with pseudo classes styled" caption="" %}
 
-### Add icons from font-awesome:
+### Add icons from font-awesome
 
-Let's say that now we want an icon after the text in our button. First, we have to install `font-awesome` (https://fontawesome.com/how-to-use/on-the-web/using-with/react)
+Let's add an icon after the text in our button. 
+
+- Install [font-awesome](https://fontawesome.com/how-to-use/on-the-web/using-with/react)
 
 ```sh 
 yarn add @fortawesome/fontawesome-svg-core
@@ -382,7 +395,7 @@ yarn add @fortawesome/free-brands-svg-icons
 yarn add @fortawesome/free-regular-svg-icons
 ```
 
-Now we have to import the icon that we want to use and put it in our button
+- Import the icon that you want and add it in the button
 
 ``` javascript
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -391,8 +404,8 @@ import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 <StyledButton>Login <FontAwesomeIcon icon={faSignInAlt}/></StyledButton>
 ```
 
-But we want this icon to be green. 
-We could create a new StyledIcon and style it but as we have to icon inside the button, we can add this style to the StyledButton that we already created. 
+- Style the icon with a yellow color. 
+As the icon is a svg inside the button, we can style it in the button itself. 
 
 ```javascript
 const StyledButton = styled(Button)`{
@@ -413,12 +426,14 @@ const StyledButton = styled(Button)`{
     }
 }`
 ```
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/button-with-fontAwesome-icon.jpeg" alt="button with font awesome icon styled" caption="" %}
 
-### Add responsive breakpoints in our styled components:
+### Add responsive breakpoints with styled components
 
-When we are in mobile, our logo is pretty big. We should give it a smaller width for this case. In our StyledImage we have to add @media. You have to write these specifications from highest to lowest.
+In `mobile`, let's give a smaller width to our logo.
+
+Add in `StyledImage` `@media`.
 
 ```javascript
 const StyledImage = styled(Image)`{
@@ -430,37 +445,38 @@ const StyledImage = styled(Image)`{
   }
 }`
 ```
-In the Browser we should see something like this:
+
+*NOTE: write the responsive breakpoints from highest to lowest*
+
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/image-responsive.jpeg" alt="image responsive" caption="" %}
 
 ### Reusing components with same styles: 
 
-Let's say that we want to add a new Image below our button, for example the logo related to styled components but smaller. Do we have to create another styledImage or can we use the same one?
-We want to use some of the properties that we add in StyledImage, but not all of them.
-In these cases we should create a new component so we can reuse the properties.
-Let's create a new component in our components folder.
+Let's add a new Image below our button, for example the logo related to styled components but smaller. 
 
-{% include figure image_path="/assets/posts/landing-page/tree-with-image-with-style.jpeg" alt="tree with component image with style" caption="" %}
+For this, we want to use some of the properties that we add in StyledImage, but not all of them.
 
-In this component we are going to write all the information that is the same for all the images that we are going to create. 
+In these cases we should create a `new component` so we can `reuse` the properties.
 
-```javascript
-import React from 'react'
+- Create a `new component` in our components folder.
 
-export class ImageWithStyle extends React.Component{
-    render(){
-        return()
-    }
-}
+```sh
+cd components
+touch ImageWithStyle.js
 ```
-We want to return an styled image component that can render diffents images with their own properties. For that we have to declare in our StyledImage the properties. In this case: src and className. 
-We should have something like this in our ImageWithStyle.js file
+
+- Import `React`, `Image` and `styled` components.
+
+- Create the `styled constant` for the `Image` component
+
+- Specify the `src` and `className` properties using the class `props`. 
+This allows us to use the component in several scenarios.
 
 ```javascript
 import React from 'react'
 import Image from 'react-bootstrap/Image'
 import styled from 'styled-components'
-
 
 const StyledImage = styled(Image)`{
     max-width: 100%;
@@ -475,8 +491,10 @@ export class ImageWithStyle extends React.Component{
     }
 }
 ```
-In our LandingPage we deleted all the information that we are using now in ImageWithStyle.
-How we use <ImageWithStyle /> in LandingPage.js? We have to import it and call it where we want to!
+
+- In `LandingPage.js` delete the information that we are using now in `ImageWithStyle`.
+
+- Import `ImageWithStyle` in `LandingPage.js` call it in the first column
 
 ```javascript
 import { ImageWithStyle } from "../components/ImageWithStyle"
@@ -499,8 +517,8 @@ export class LandingPage extends React.Component{
 }
 ```
 
-We have to style these two components with the css that we want. 
-In this case we are going to style our own component. You can see that we do it the same way as a react component
+- Create the constants to style `ImageWithStyle`.
+
 ```javascript 
 const StyledLogoPage = styled(ImageWithStyle)`{
     width: 200px;
@@ -532,9 +550,9 @@ export class LandingPage extends React.Component{
 
 ```
 
-Now we have to instance the properties that we declared in <ImageWithStyle />.
-So we have to instance the src and the className. 
-For the first one, we already had imported logo, and I added logoStyledComponent.
+- Instance the properties declared in `ImageWithStyle`.
+
+- Import the images for `src` property.
 
 ```javascript
 import logo from '../images/logo.png'
@@ -556,14 +574,11 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-As you can see the images were rendered with the styled widths that we gave them, but for example, in the <StyledLogoPage /> we didn't specify it. Why is this working? Because styled-components creates classes that are added in the element that we are telling it to do it. 
-<StyledLogoPage /> is the father of <ImageWithStyle />. Because of this, the second one receives from the constructor all the properties from <StyledLogoPage />. We said that styled-componets lib creates new classes for the elements. So we have to specify in the child className={this.props.className} so the style can be rendered.  
-If you don't give to ImageWithStyle the className prop, the images are not going to have the styles that we define. 
+*NOTE: you don't have to specify className property because `styled-components` creates the prop className and it will automatically propagate to the children.* 
 
-### Reusing styles: 
+### Reusing styles 
 
-
-If we focus on our right column, we can see that the components don't have space between them. We are going to add this space, creating a styled div. We can add it in each one but it's better if we create a styled constant, because if we want to change it after, we only have to do it in one place. 
+Let's add some space between the components of the second column by creating a `styled div`.
 
 ``` javascript
 
@@ -595,13 +610,16 @@ export class LandingPage extends React.Component{
 }
 ```
 
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/space-between-components.jpeg" alt="space between components" caption="" %}
 
-### Show style depending of condition from properties: 
+### Show style depending of condition from properties
 
-The last thing we are going to see if what happens if we want to style a component depenending of the condition of a propertie.
-Let's suppose that we want that some images in our landingPage have the same background and others don't. We can create a propertie backgroundImage in the constructor of our LandingPage, and set it to true. Then, when we call our component ImageWithStyle like this or instance with style, we can give this property as parameter. 
+Let's style a component depending of the `condition` of a property. Suppose that we want that some images in our `landingPage` have the same background and others don't. 
+
+- Create the property `backgroundImage` in the constructor of our `LandingPage`, and set it as `true`. 
+
+- Pass as a parameter the variable created in `ImageWithStyle` component.
 
 ```javascript
 export class LandingPage extends React.Component{
@@ -631,7 +649,9 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-and in ImageWithStyle we add the style that we want to add if this condition is true. See that now the StyledImage is inside the render method. Why is that? Because if not this class can't read {this.props.background}. This propertie comes with the super(props), so we must call it inside the render. 
+- In `ImageWithStyle.js`, add the style if this condition is true. 
+
+*NOTE: the constant with the style is inside the class because we have to read props.*
 
 ```javascript 
 const bgBlack = `{
@@ -652,5 +672,5 @@ export class ImageWithStyle extends React.Component{
 }
 ```
 
-In the Browser we should see something like this:
+In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/background-for-some-images.jpeg" alt="background-for-some-images" caption="" %}
