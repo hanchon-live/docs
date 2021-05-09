@@ -1,3 +1,15 @@
+---
+title: "Routes React"
+date: 2021-04-24T22:10:30+01:00
+categories:
+  - guides
+tags:
+  - styled-components
+  - react-bootstrap
+  - react
+last_modified_at: 2022-04-28T12:59:30+01:00
+---
+
 We are going to use the loginPage example and add routes.
 
 You can clone the repository or keep working in your project.

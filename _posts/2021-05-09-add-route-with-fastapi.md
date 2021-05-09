@@ -79,6 +79,7 @@ Edit the `schema.py` file and create the requests and responses that we want to 
 
 *This change makes possible to just return the object in the endpoint and it will have all the information.*
 
+
 ``` python
 from typing import Optional
 

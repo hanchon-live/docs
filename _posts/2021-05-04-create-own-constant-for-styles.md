@@ -1,3 +1,15 @@
+---
+title: "Constants styles"
+date: 2021-04-24T22:10:30+01:00
+categories:
+  - guides
+tags:
+  - styled-components
+  - react-bootstrap
+  - react
+last_modified_at: 2022-04-28T12:59:30+01:00
+---
+
 If you are a develepor front end, you are familiar with bootstrap classes.
 
 As you can see in these tutorials, we are not using them. But sometimes it should be great to use it because we are always writing the same styles all over different files.

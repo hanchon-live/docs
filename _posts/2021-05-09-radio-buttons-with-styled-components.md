@@ -1,13 +1,13 @@
 ---
 title: "Radio buttons with styled components (Safari compatible)"
-date: 2021-05-09T22:17:30+01:00
+date: 2021-05-09T19:18:30+01:00
 categories:
   - guides
 tags:
   - styled-components
   - radio button
   - safari 
-last_modified_at: 2021-05-09T22:17:30+01:00
+last_modified_at: 2021-05-09T19:18:30+01:00
 ---
 
 We are going to create our styled component for radio buttons. 

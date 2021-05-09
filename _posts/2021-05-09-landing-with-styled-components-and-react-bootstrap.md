@@ -1,13 +1,13 @@
 ---
 title: "Landing page with styled-components and react-bootstrap"
-date: 2021-05-09T22:17:30+01:00
+date: 2021-05-09T19:17:30+01:00
 categories:
   - guides
 tags:
   - styled-components
   - react-bootstrap
   - react
-last_modified_at: 2021-05-09T22:17:30+01:00
+last_modified_at: 2021-05-09T19:17:30+01:00
 ---
 
 We are going to create a **Landing page** using [react-bootstrap](https://react-bootstrap.github.io/) components and [styled-components](https://styled-components.com/).
@@ -17,7 +17,7 @@ We are going to create a **Landing page** using [react-bootstrap](https://react-
 
 
 # Requirements
-This guide assumes you already have installed in your system [node v.15.14.0](https://github.com/nvm-sh/nvm) or newer.
+This guide assumes you already have installed in your system [node v.15.14.0](https://nodejs.org/es/download/) or newer, on any **Linux** dist you can use [nvm](https://github.com/nvm-sh/nvm) to quickly change your node versions.
 
 # Setting up the environment
 We have to create a new `react-app` for our landing page.
@@ -115,7 +115,7 @@ To import this component in the `index.js` file, just a line should be added.
 
 In `index.js` the `LandingPage` is imported using relative paths.
 
-```javascript
+``` react
 import { LandingPage } from './components/LandingPage'
 ReactDOM.render(
   <React.StrictMode>
@@ -130,8 +130,11 @@ Great! Now we see "This a paragraph" in our browser!
 # Create content with react-bootstrap
 ## Install react-bootstrap
 
-Let's create the content for the landing page instead of the paragraph: one `row` with two `columns`. In the first column, we are going to show a logo. In the second one, a h1 with a button that allows us to login.
-For that, let's install [react-bootstrap](https://react-bootstrap.github.io/)
+Let's create the content for the landing page instead of the paragraph: one `row` with two `columns`.
+
+In the first `column`, we are going to show a `logo`. In the second one, a `h1` with a `button` that allows us to login.
+
+For that, let's install [react-bootstrap](https://react-bootstrap.github.io/):
 
 ```sh
 yarn add react-bootstrap bootstrap
@@ -151,7 +154,7 @@ And add the following link in `index.html` (this file is in `public folder`).
 
 To create these components in the `LoginPage.js` file, we only have to import them from `react-bootstrap` and add them in the return statment. 
 
-```javascript
+``` react
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -168,7 +171,7 @@ export class LandingPage extends React.Component{
 ```
 ### Add Image component
 
-Let's add the logo in the first column. First, let's create an images folder for our project.
+Let's add the `logo` in the first `column`. First, let's create an `images` folder for our project (`src/images`).
 
 ```sh
 cd ..
@@ -176,7 +179,7 @@ mkdir images
 ```
 For `images`, `react-bootstrap` has a specific component. 
 
-```javascript
+``` react
 import Image from 'react-bootstrap/Image'
 
 export class LandingPage extends React.Component{
@@ -192,9 +195,9 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-Let's import the image logo. In `src`, the logo has to be called between `{}` (that way the code can read the value for the variable)
+Let's import the `image` logo. In `src`, the logo has to be called between `{}` to access the variable's value.
 
-```javascript
+``` react
 import logo from '../images/logo.png'
 
 export class LandingPage extends React.Component{
@@ -216,9 +219,9 @@ In the browser you should see something like this:
 
 ### Add Button component
 
-Let's add the h1 and button in the second column. Let's add the `button` component from `react-bootstrap`.
+Let's add the `h1` and `button` (component from `react-bootstrap`) in the second `column`:
 
-``` javascript
+``` react
 import Button from 'react-bootstrap/Button'
 
 export class LandingPage extends React.Component{
@@ -231,7 +234,6 @@ export class LandingPage extends React.Component{
             <Col xs={6}>
                 <h1>Welcome!</h1>
                 <Button>Login</Button>
-                <Image />
             </Col>
         </Row>
         )
@@ -255,14 +257,14 @@ yarn add styled-components
 
 Let's center the content of the `row` vertically and horizontally. 
 
-- Import `styled` from 'styled-components'
+- Import `styled` from `'styled-components'`
 
-```javascrtipt
+``` react
 import styled from 'styled-components'
 ```
-- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
+- Create a `constant`, the name must be **capitalize**. We are going to pass a `string` value to the `styled` function to define the component style.
 
-```javascript
+``` react
 const StyledRow = styled(Row)`{
     display: flex;
     align-items: center;
@@ -273,9 +275,9 @@ const StyledRow = styled(Row)`{
 ```
 *NOTE: The code inside `styled` has to represent the component. It could be a `html element` or a `react component`.*
 
-- Replace the `component` for the constant created.
+- Replace `Row` for the newly created component `StyledRow`:
 
-```javascript
+``` react
 export class LandingPage extends React.Component{
     render(){
         return(
@@ -299,10 +301,10 @@ In the browser you should see something like this:
 
 Let's create the style for our image. 
 
-- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
+- Define the style in a `constant` and replace the `Image`:
 
 
-```javascript
+``` react
 const StyledImage = styled(Image)`{
     max-width: 100%;
     height: auto;
@@ -327,14 +329,13 @@ export class LandingPage extends React.Component{
 ```
 ### Style html elements with styled-components
 
-- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
-As the code inside styled is an html elment, we write it with a dot.
+- Create a `constant` to define the style of the `h1`. This is a **html element** so we write it after a dot.
 
-``` javascript 
+``` react 
 const StyledH1 = styled.h1`{
     color: green;
     font-weight: 800;
-}`
+}`;
 
 <StyledH1>Welcome!</StyledH1>
 ```
@@ -343,24 +344,24 @@ In the browser you should see something like this:
 
 ### Style pseudo-classes with styled-components: 
 
-- Create a constant. The name must be capitalize. We are going to pass a string value to the styled function. 
+- Define the `button` style in a `constant`:
 
-```javascript
+```react
 const StyledButton = styled(Button)`{
     border-radius: 2rem;
     background-color: gray;
     padding: 0.3rem 2rem ;
-    border: none;
-    
-}`
+    border: none; 
+}`;
+
  <StyledButton>Login</StyledButton>
 ```
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/styled-button.jpeg" alt="style for button" caption="" %}
 
-The `hover` action displays a blue background. Let's apply a light gray color to the pseudo classes `hover`, `active` and `focus`.
+The `hover` action displays a `blue` background. Let's apply a `light gray` color to the pseudo classes `hover`, `active` and `focus`.
 
-``` javascript
+``` react
 const StyledButton = styled(Button)`{
     border-radius: 2rem;
     background-color: gray;
@@ -375,15 +376,17 @@ const StyledButton = styled(Button)`{
         box-shadow: none;    
     
     }
-}`
+}`;
 ```
+
+*NOTE: To style hover, active or focus, we need to add an & for it to work.*
 
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/button-with-hover-activated.jpeg" alt="button with pseudo classes styled" caption="" %}
 
 ### Add icons from font-awesome
 
-Let's add an icon after the text in our button. 
+Let's add an `icon` after the text in our `button`. 
 
 - Install [font-awesome](https://fontawesome.com/how-to-use/on-the-web/using-with/react)
 
@@ -395,19 +398,18 @@ yarn add @fortawesome/free-brands-svg-icons
 yarn add @fortawesome/free-regular-svg-icons
 ```
 
-- Import the icon that you want and add it in the button
+- Import the `icon` that you want and add it in the `button`
 
-``` javascript
+``` react
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 <StyledButton>Login <FontAwesomeIcon icon={faSignInAlt}/></StyledButton>
 ```
 
-- Style the icon with a yellow color. 
-As the icon is a svg inside the button, we can style it in the button itself. 
+- Style the `icon` with a `yellow` color. As the icon is a `svg` inside the `button`, we can style it in the `button` itself. 
 
-```javascript
+``` react
 const StyledButton = styled(Button)`{
     border-radius: 2rem;
     background-color: gray;
@@ -435,7 +437,7 @@ In `mobile`, let's give a smaller width to our logo.
 
 Add in `StyledImage` `@media`.
 
-```javascript
+``` react
 const StyledImage = styled(Image)`{
   max-width: 100%;
   height: auto;
@@ -453,9 +455,9 @@ In the browser you should see something like this:
 
 ### Reusing components with same styles: 
 
-Let's add a new Image below our button, for example the logo related to styled components but smaller. 
+Let's add a new `Image` below our `button`, for example the `logo` related to styled components but smaller. 
 
-For this, we want to use some of the properties that we add in StyledImage, but not all of them.
+For this, we want to use some of the `properties` that we add in `StyledImage`, but not all of them.
 
 In these cases we should create a `new component` so we can `reuse` the properties.
 
@@ -470,10 +472,9 @@ touch ImageWithStyle.js
 
 - Create the `styled constant` for the `Image` component
 
-- Specify the `src` and `className` properties using the class `props`. 
-This allows us to use the component in several scenarios.
+- Specify the `src` and `className` properties using the class `props`. This allows us to use the component in several scenarios.
 
-```javascript
+``` react
 import React from 'react'
 import Image from 'react-bootstrap/Image'
 import styled from 'styled-components'
@@ -481,7 +482,7 @@ import styled from 'styled-components'
 const StyledImage = styled(Image)`{
     max-width: 100%;
     height: auto;
-}`
+}`;
 
 export class ImageWithStyle extends React.Component{
     render(){
@@ -494,9 +495,9 @@ export class ImageWithStyle extends React.Component{
 
 - In `LandingPage.js` delete the information that we are using now in `ImageWithStyle`.
 
-- Import `ImageWithStyle` in `LandingPage.js` call it in the first column
+- Import `ImageWithStyle` in `LandingPage.js` call it in the first column:
 
-```javascript
+``` react
 import { ImageWithStyle } from "../components/ImageWithStyle"
 
 export class LandingPage extends React.Component{
@@ -519,17 +520,17 @@ export class LandingPage extends React.Component{
 
 - Create the constants to style `ImageWithStyle`.
 
-```javascript 
+``` react 
 const StyledLogoPage = styled(ImageWithStyle)`{
     width: 200px;
     @media (max-width: 576px){
          width:100px;
     }
-}`
+}`;
 
 const StyledLogoStyledComp = styled(ImageWithStyle)`{
     width:80px;
-}`
+}`;
 
 export class LandingPage extends React.Component{
     render(){
@@ -550,13 +551,12 @@ export class LandingPage extends React.Component{
 
 ```
 
-- Instance the properties declared in `ImageWithStyle`.
+- Instance the properties declared in `ImageWithStyle`, setting the images `src` property.
 
-- Import the images for `src` property.
+```react
+import logo from '../images/logo.png';
+import logoStyledComponent from '../images/logoStyledComponents.png';
 
-```javascript
-import logo from '../images/logo.png'
-import logoStyledComponent from '../images/logoStyledComponents.png'
 export class LandingPage extends React.Component{
     render(){
         return(
@@ -574,17 +574,17 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-*NOTE: you don't have to specify className property because `styled-components` creates the prop className and it will automatically propagate to the children.* 
+*NOTE: you don't have to specify className property because `styled-components` creates the prop className and it will automatically propagate to its children.* 
 
 ### Reusing styles 
 
 Let's add some space between the components of the second column by creating a `styled div`.
 
-``` javascript
+``` react
 
 const RightColumnSpaces = styled.div`{
     margin-bottom: 1rem;
-}`
+}`;
 
 export class LandingPage extends React.Component{
     render(){
@@ -615,23 +615,43 @@ In the browser you should see something like this:
 
 ### Show style depending of condition from properties
 
-Let's style a component depending of the `condition` of a property. Suppose that we want that some images in our `landingPage` have the same background and others don't. 
+Let's style a `component` depending of the `condition` of a property. For example, we want only half of our `images` to have `background`.
 
-- Create the property `backgroundImage` in the constructor of our `LandingPage`, and set it as `true`. 
+- In `ImageWithStyle.js`, add the style if this condition is true. 
 
-- Pass as a parameter the variable created in `ImageWithStyle` component.
+*NOTE: the constant with the style is inside the class because it has to read props.*
 
-```javascript
+``` react 
+const bgBlack = `{
+    background-color: black
+}`;
+
+export class ImageWithStyle extends React.Component{
+    render(){
+        const StyledImage = styled(Image)`{
+            max-width: 100%;
+            height: auto;
+            ${this.props.background && bgBlack}
+        }`
+        return(
+            <StyledImage src={this.props.src} className={this.props.className}/>
+        )
+    }
+}
+```
+
+- On the `ImageWithStyle` that we want `background`, let's set the `background` variable as `true`:
+
+``` react
 export class LandingPage extends React.Component{
     constructor(props){
         super(props);
-        this.backgroundImage = true;
     }
     render(){
         return(
         <StyledRow>
             <Col xs={6}>
-                <StyledLogoPage src={logo} background={this.backgroundImage}/>
+                <StyledLogoPage src={logo} background={true}/>
             </Col>
             <Col xs={6}>
                 <RightColumnSpaces>
@@ -645,28 +665,6 @@ export class LandingPage extends React.Component{
                 </RightColumnSpaces>
             </Col>
         </StyledRow>
-        )
-    }
-}
-```
-- In `ImageWithStyle.js`, add the style if this condition is true. 
-
-*NOTE: the constant with the style is inside the class because we have to read props.*
-
-```javascript 
-const bgBlack = `{
-    background-color: black
-}`
-
-export class ImageWithStyle extends React.Component{
-    render(){
-        const StyledImage = styled(Image)`{
-            max-width: 100%;
-            height: auto;
-            ${this.props.background && bgBlack}
-        }`
-        return(
-            <StyledImage src={this.props.src} className={this.props.className}/>
         )
     }
 }
