@@ -128,7 +128,7 @@ Great! Now we see "This a paragraph" in our browser!
 {% include figure image_path="/assets/posts/landing-page/Screenshot from 2021-05-04 17-15-22.png" alt="this is a paragraph image" caption="" %}
 
 # Create content with react-bootstrap
-## Install react-bootstrap
+## Install react-bootstrap:
 
 Let's create the content for the landing page instead of the paragraph: one `row` with two `columns`.
 
@@ -149,8 +149,8 @@ And add the following link in `index.html` (this file is in `public folder`).
       crossorigin="anonymous"
     />  
 ```
-## Create components with react-bootstrap
-### Add Row and Col components
+## Create components with react-bootstrap:
+### Add Row and Col components:
 
 To create these components in the `LoginPage.js` file, we only have to import them from `react-bootstrap` and add them in the return statment. 
 
@@ -169,7 +169,7 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-### Add Image component
+### Add Image component:
 
 Let's add the `logo` in the first `column`. First, let's create an `images` folder for our project (`src/images`).
 
@@ -217,7 +217,7 @@ export class LandingPage extends React.Component{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/first-col-with-Image.jpeg" alt="first col with logo" caption="" %}
 
-### Add Button component
+### Add Button component:
 
 Let's add the `h1` and `button` (component from `react-bootstrap`) in the second `column`:
 
@@ -243,9 +243,9 @@ export class LandingPage extends React.Component{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/second-col-with-content.jpeg" alt="second col with content" caption="" %}
 
-## Create styles with styled-components
+# Create styles with styled-components
 
-### Install lib styled-components
+## Install lib styled-components:
 
 Let's install [styled-components](https://styled-components.com/) to style the content.
 
@@ -253,7 +253,7 @@ Let's install [styled-components](https://styled-components.com/) to style the c
 yarn add styled-components
 ```
 
-### Style Row with styled-components
+## Style Row with styled-components:
 
 Let's center the content of the `row` vertically and horizontally. 
 
@@ -297,7 +297,7 @@ export class LandingPage extends React.Component{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/styledRow.jpeg" alt="styled Row" caption="" %}
 
-### Style Image with styled-components
+## Style Image with styled-components:
 
 Let's create the style for our image. 
 
@@ -327,7 +327,7 @@ export class LandingPage extends React.Component{
     }
 }
 ```
-### Style html elements with styled-components
+## Style html elements with styled-components:
 
 - Create a `constant` to define the style of the `h1`. This is a **html element** so we write it after a dot.
 
@@ -342,7 +342,7 @@ const StyledH1 = styled.h1`{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/h1-with-style.jpeg" alt="h1 with style" caption="" %}
 
-### Style pseudo-classes with styled-components: 
+## Style pseudo-classes with styled-components: 
 
 - Define the `button` style in a `constant`:
 
@@ -384,7 +384,7 @@ const StyledButton = styled(Button)`{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/button-with-hover-activated.jpeg" alt="button with pseudo classes styled" caption="" %}
 
-### Add icons from font-awesome
+## Add icons from font-awesome:
 
 Let's add an `icon` after the text in our `button`. 
 
@@ -431,7 +431,7 @@ const StyledButton = styled(Button)`{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/button-with-fontAwesome-icon.jpeg" alt="button with font awesome icon styled" caption="" %}
 
-### Add responsive breakpoints with styled components
+## Add responsive breakpoints with styled components:
 
 In `mobile`, let's give a smaller width to our logo.
 
@@ -453,7 +453,7 @@ const StyledImage = styled(Image)`{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/image-responsive.jpeg" alt="image responsive" caption="" %}
 
-### Reusing components with same styles: 
+## Reusing components with same styles: 
 
 Let's add a new `Image` below our `button`, for example the `logo` related to styled components but smaller. 
 
@@ -576,7 +576,7 @@ export class LandingPage extends React.Component{
 ```
 *NOTE: you don't have to specify className property because `styled-components` creates the prop className and it will automatically propagate to its children.* 
 
-### Reusing styles 
+## Reusing styles:
 
 Let's add some space between the components of the second column by creating a `styled div`.
 
@@ -613,7 +613,7 @@ export class LandingPage extends React.Component{
 In the browser you should see something like this:
 {% include figure image_path="/assets/posts/landing-page/space-between-components.jpeg" alt="space between components" caption="" %}
 
-### Show style depending of condition from properties
+## Show style depending of condition from properties:
 
 Let's style a `component` depending of the `condition` of a property. For example, we want only half of our `images` to have `background`.
 

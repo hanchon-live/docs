@@ -10,7 +10,9 @@ tags:
 last_modified_at: 2021-05-09T19:18:30+01:00
 ---
 
-We are going to create our styled component for radio buttons. 
+We are going to create our styled component for radio buttons.
+
+{% include toc icon="cog" title="Content" %}
 
 # Create the radioButton file
 
@@ -38,7 +40,7 @@ export class RadioButton extends React.Component {
 ```
 *NOTE: there is a bug when you are using Form.Check that does not renders the input correctly in Safari, so we use this custom solution*
 
-# Add RadioButton in your component
+# Add RadioButton to a component
 
 Let's add the `RadioButton` to the `LandingPage.js`, we are using the `LandingPage` as an example from the [last guide](/guides/landing-with-styled-components-and-react-bootstrap/) *LandingPage with styled-components*.
 
@@ -46,7 +48,7 @@ Let's add the `RadioButton` to the `LandingPage.js`, we are using the `LandingPa
 ``` react
 import { RadioButton } from '../components/generics/RadioButton'
 
-export class LoginPage extends React.Component{
+export class LandingPage extends React.Component{
     ...
     render(){
         return(
