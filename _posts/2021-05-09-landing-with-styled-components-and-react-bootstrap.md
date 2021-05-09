@@ -644,9 +644,6 @@ export class ImageWithStyle extends React.Component{
 
 ``` react
 export class LandingPage extends React.Component{
-    constructor(props){
-        super(props);
-    }
     render(){
         return(
         <StyledRow>
