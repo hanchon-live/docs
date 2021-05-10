@@ -110,3 +110,37 @@ function App() {
 
 export default App;
 ```
+Let's say that when we click the login button, we want to go to the dashboard.
+For that we have to go to our LoginPage.js and in our button we have to add the href with the path that we created. 
+```javascript
+export class LoginPage extends React.Component{
+    constructor(props){
+        super(props);
+        this.backgroundImage = true;
+    }
+    render(){
+        return(
+        <StyledRow>
+            <Col xs={6}>
+                <StyledLogoPage src={logo} background={this.backgroundImage}/>
+            </Col>
+            <Col xs={6}>
+                <RightColumnSpaces>
+                    <StyledH1>Welcome!</StyledH1>
+                </RightColumnSpaces>
+                <RightColumnSpaces>
+                    <StyledButton href={"/dashboard"}>Login <FontAwesomeIcon icon={faSignInAlt}/></StyledButton>
+                </RightColumnSpaces>
+                <RightColumnSpaces>
+                    <StyledLogoStyledComp src={logoStyledComponent}/>
+                </RightColumnSpaces>
+            </Col>
+        </StyledRow>
+        )
+    }
+}
+```
+As you can see we write "/dashboard" im LoginPage and in App.js. Writing like this it could give us some problems, because now we want that our redirect has the name dashboard, but this name can change. And maybe then we wnat to be case senstive. In that case we'll have to change in each file that we wrote it.
+We dont want that. So we are going to create a new folder for routes. 
+
+{% include figure image_path="/assets/posts/routes-react/routes-tree.jpeg" alt="tree with routes" caption="" %}
