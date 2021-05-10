@@ -1,6 +1,6 @@
 ---
 title: "Routes React"
-date: 2021-04-24T22:10:30+01:00
+date: 2021-05-09T20:18:30+01:00
 categories:
   - guides
 tags:
@@ -10,7 +10,7 @@ tags:
 last_modified_at: 2022-04-28T12:59:30+01:00
 ---
 
-Let's create the `routes` for our project. 
+Let's create the `routes` for oura react project. 
 
 We are using the `LandingPage` as an example from the [last guide](/guides/landing-with-styled-components-and-react-bootstrap/) *LandingPage with styled-components*.
 
