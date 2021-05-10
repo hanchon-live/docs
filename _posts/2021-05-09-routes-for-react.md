@@ -2,7 +2,7 @@
 title: "Routes React"
 date: 2021-05-09T20:18:30+01:00
 categories:
-  - guides
+  - tip
 tags:
   - routes 
   - react-router-dom
