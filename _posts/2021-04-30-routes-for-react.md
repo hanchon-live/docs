@@ -4,55 +4,38 @@ date: 2021-04-24T22:10:30+01:00
 categories:
   - guides
 tags:
-  - styled-components
-  - react-bootstrap
+  - routes 
+  - react-router-dom
   - react
 last_modified_at: 2022-04-28T12:59:30+01:00
 ---
 
-We are going to use the loginPage example and add routes.
+Let's create the `routes` for our project. 
 
-You can clone the repository or keep working in your project.
+We are using the `LandingPage` as an example from the [last guide](/guides/landing-with-styled-components-and-react-bootstrap/) *LandingPage with styled-components*.
 
-We are going to create a new component, called Dashboard, so we can move through pages. 
-You will have something like this: 
-{% include figure image_path="/assets/posts/routes-react/tree-with-dashboard.jpeg" alt="tree with dashboard" caption="" %}
+{% include toc icon="cog" title="Content" %}
 
-Let's create a some simply content for our dashboard
-```javascript
-import React from 'react'
-import styled from 'styled-components'
-import Button from 'react-bootstrap/Button'
 
-const StyledDiv = styled.div`{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: lightGrey;
-    height: 100vh;
-}`
+I already created the `Dashboard` component in `components` folder.
 
-export class Dashboard extends React.Component{
-    render(){
-        return (
-        <StyledDiv>
-            <h1>This is the dashboard page!</h1>
-            <Button variant="secondary">Back</Button>
-        </StyledDiv>
-    )}
-}
-```
+# Install react-router-dom
 
-The first step is to install [`react-router-dom`](https://reactrouter.com/web/guides/quick-start). This library is used to create the routing in react apps. 
+Let's install [react-router-dom](https://reactrouter.com/web/guides/quick-start). 
+
+This `library` is used to create the `routing` in `react apps`. 
 
 ```sh
 yarn add react-router-dom
 ```
 
-Our App.js file is going to be the one that manages our routing page. We are going to delete the content and create the routes. 
-We should have this:
+# Create Route for LandingPage in App.js
 
-```javascript 
+Let's create our `routing` in `App.js` file.
+
+We should see something like this:
+
+```react 
 function App() {
   return (
     
@@ -61,98 +44,179 @@ function App() {
 export default App;
 ```
 
-We are going to use the components BrowserRouter, Switch and route from `react-router-dom`
+##  BrowserRouter component from react-router-dom:
 
-<!-- 
-The Route 
+`BrowserRouter` allows us to access to the `navigation history`, do `redirections`, etc. 
 
-- Strict: this is going to render the component only if at the end of the path it appears a slash. Ex: /home/ === /home/
+This component is better for `dynamics request` (if you want to serve `statics request` you should use `HashRouter`). 
 
-Sensitive: Si le pasamos true vamos a tener en cuenta las mayúsculas y las minúsculas de nuestras rutas. Ej: /Home === /Home
+```react
+import { BrowserRouter as Router } from "react-router-dom";
 
-Component: Le pasamos un componente para renderizar solo cuando la ubicación coincide. En este caso el componente se monta y se desmonta no se actualiza.
+function App() {
+  return (
+    <Router>
+    </Router>
+  );
+}
 
-Render: Le pasamos una función para montar el componente en línea. -->
-The BrowserRouter gives properties to our component so we can access to the navegation history, do redirections, etc. This component is better for dynamics request (if we want to serve statics request we use HashRouter). 
+export default App;
+```
+##  Switch component from react-router-dom:
 
-Switch: this component allows us to render only the first Route child or Redirect that matches with our path. When a <Switch> is rendered, it searches through it's children <Route> elements to find one whose path matches the current URL. When it finds one, it renders that <Route> and ignores all others. This means that you should put <Route>s with more specific (typically longer) paths before less-specific ones. If no <Route> matches, the <Switch> renders nothing (null).
+`Switch` allows us to render `only` the` first Route child` or `Redirect` that `matches` with our path. 
 
-Route: this component renders some UI when its path matches the current URL.
+When a `<Switch>` is rendered, it `searches` through it's children `<Route> elements `to find one whose path `matches` the `current URL`. 
+
+When it finds one, it `renders` that `<Route>` and ignores all others. 
+
+This means that you should put `<Route>s` with more `specific` (typically longer) `paths` before less-specific ones. If no `<Route>` matches, the `<Switch>` renders nothing (null).
+
+``` react
+import { Switch } from "react-router-dom";
+function App() {
+  ...
+    <Router>
+      <Switch>
+      </Switch>
+    </Router>  
+  ...
+}
+export default App;
+```
+##  Route component from react-router-dom:
+
+`Route` renders some UI when its `path` `matches` the `current URL`.
+
 This component has some properties:
-- Path: the route where we have to render our component. We can pass a string or array string.
-- Exact: this is going to render the component only if the path specify is exactly the same. Ex: /home === /home.
 
-``` javascript
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+- Path: the route where we have to `render` our component. We can pass a string or array string.
+- Exact: this is going to render the component `only` if the `path` specify is `exactly` the `same`. Example: /home === /home.
+
+``` react
+import { Route } from "react-router-dom";
 import { LoginPage } from './components/LoginPage'
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path={"/"}>
-            <LoginPage />
-        </Route>
-      </Switch>
-    </Router>
-  );
+  ...
+    <Switch>
+      <Route exact path={"/"}>
+        <LoginPage />
+      </Route>
+    </Switch>
+  ...
 }
 
 export default App;
 ```
+# Create Route for Dashboard in App.js
 
-Let's add our route for Dashboard.js. For that we should add another <Route > component with the path and compoonent that we want to render. 
-``` javascript
+Let's create the `route` for `Dashboard` by adding another `<Route>` component with the `path` and the `component` to render.
+
+``` react
 import { Dashboard } from './components/Dashboard'
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path={"/"}>
-            <LoginPage />
-        </Route>
-        <Route exact path={"/dashboard"}>
-            <Dashboard />
-        </Route>
-      </Switch>
-    </Router>
+  ...
+    <Route key="home" exact path={"/"}>
+        <LoginPage />
+    </Route>
+    <Route key="dashboard" exact path={"/dashboard"}>
+        <Dashboard />
+    </Route>
+  ...
   );
 }
 
 export default App;
 ```
-Let's say that when we click the login button, we want to go to the dashboard.
-For that we have to go to our LoginPage.js and in our button we have to add the href with the path that we created. 
-```javascript
+
+# Redirect to URL when click a button
+
+Let's go to the `Dashboard` page when we click in the `login button` (in `LoginPage.js`) and to the `LoginPage` when we click on `back button` (in `Dashboard.js`)
+
+In `LoginPage.js`, let's add `href` with the `path` that we created.
+```react
 export class LoginPage extends React.Component{
-    constructor(props){
-        super(props);
-        this.backgroundImage = true;
-    }
     render(){
         return(
-        <StyledRow>
-            <Col xs={6}>
-                <StyledLogoPage src={logo} background={this.backgroundImage}/>
-            </Col>
-            <Col xs={6}>
-                <RightColumnSpaces>
-                    <StyledH1>Welcome!</StyledH1>
-                </RightColumnSpaces>
-                <RightColumnSpaces>
-                    <StyledButton href={"/dashboard"}>Login <FontAwesomeIcon icon={faSignInAlt}/></StyledButton>
-                </RightColumnSpaces>
-                <RightColumnSpaces>
-                    <StyledLogoStyledComp src={logoStyledComponent}/>
-                </RightColumnSpaces>
-            </Col>
-        </StyledRow>
+        ...
+          <RightColumnSpaces>
+              <StyledButton href={"/dashboard"}>Login <FontAwesomeIcon icon={faSignInAlt}/></StyledButton>
+          </RightColumnSpaces>
+        ...
         )
     }
 }
 ```
-As you can see we write "/dashboard" im LoginPage and in App.js. Writing like this it could give us some problems, because now we want that our redirect has the name dashboard, but this name can change. And maybe then we wnat to be case senstive. In that case we'll have to change in each file that we wrote it.
-We dont want that. So we are going to create a new folder for routes. 
 
-{% include figure image_path="/assets/posts/routes-react/routes-tree.jpeg" alt="tree with routes" caption="" %}
+## Create constants for paths:
+
+We wrote `"/dashboard"` in `LoginPage.js` and in `App.js`. 
+
+If we have the same text used in several files, we should create constants. This way you avoid writing problems. 
+
+### Create file for Routes constants:
+
+Let's create the file for our `constants` (src/routes/Routes.js). 
+
+``` sh
+cd src
+mkdir routes
+touch Routes.js
+```
+
+### Define constants:
+
+In `routes.js` let's create a constant and export it.
+```javascript
+const routes = {
+  home: '/',
+  dashboard: '/dashboard',
+}
+
+export default routes;
+```
+### Use the constants in the files:
+
+Let's use our constants. First import the constants and then replace them.
+
+#### In App.js:
+import Routes from "./routes/routes";
+```react
+
+function App() {
+  ...
+    <Route key="home" exact path={Routes.home}>
+        <LoginPage />
+    </Route>
+    <Route key="dashboard" exact path={Routes.dashboard}>
+        <Dashboard />
+    </Route>
+  ...
+  );
+}
+
+export default App;
+```
+#### In Landing.js:
+```react
+import Routes from "../routes/routes";
+export class LandingPage extends React.Component{
+  ...
+   <RightColumnSpaces>
+      <StyledButton href={Routes.dashboard}>Login <FontAwesomeIcon icon={faSignInAlt}/></StyledButton>
+    </RightColumnSpaces>
+  ...
+}
+```
+
+#### In Dashboard.js:
+```react
+import Routes from '../routes/routes'
+export class Dashboard extends React.Component{
+  ...
+   <Button href={Routes.home} variant="secondary">Back</Button>
+  ...
+}
+```
