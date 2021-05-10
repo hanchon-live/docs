@@ -7,7 +7,7 @@ tags:
   - styled-components
   - react-bootstrap
   - react
-last_modified_at: 2021-05-09T19:17:30+01:00
+last_modified_at: 2021-05-10T17:40:30+01:00
 ---
 
 We are going to create a **Landing page** using [react-bootstrap](https://react-bootstrap.github.io/) components and [styled-components](https://styled-components.com/).

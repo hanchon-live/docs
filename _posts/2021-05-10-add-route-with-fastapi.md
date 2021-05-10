@@ -7,7 +7,7 @@ tags:
   - vscode
   - python
   - fastapi
-last_modified_at: 2021-05-06T10:59:30+01:00
+last_modified_at: 2021-05-10T17:40:30+01:00
 ---
 
 This is a basic example on how to add new routes to the **GetGloby** API:

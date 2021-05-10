@@ -7,7 +7,7 @@ tags:
   - styled-components
   - radio button
   - safari 
-last_modified_at: 2021-05-09T19:18:30+01:00
+last_modified_at: 2021-05-10T17:40:30+01:00
 ---
 
 We are going to create our styled component for radio buttons.
