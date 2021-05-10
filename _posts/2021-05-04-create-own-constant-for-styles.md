@@ -5,29 +5,41 @@ categories:
   - guides
 tags:
   - styled-components
-  - react-bootstrap
-  - react
+  - classes 
+  - constants
 last_modified_at: 2022-04-28T12:59:30+01:00
 ---
 
-If you are a develepor front end, you are familiar with bootstrap classes.
+In this tutorial we are going to `create` our own `styled constant` so we can use them all over `different files`.
 
-As you can see in these tutorials, we are not using them. But sometimes it should be great to use it because we are always writing the same styles all over different files.
+We are using the `LandingPage` as an example from the [last guide](/guides/landing-with-styled-components-and-react-bootstrap/) *LandingPage with styled-components*.
 
-Instead of doing that, we can create our own constant and call it in any file that we want. 
-These constants are going to be globall to our application. So we should create a folder for this. Where? Well, the constant are not part of our components, so we should create our styles folder in src
+{% include toc icon="cog" title="Content" %}
 
-<!-- imagen del styles trree -->
 
-Let's start with the colors. In our project so far we use the colors: green, gray and black. Let's suppose that we want to change our green color for the blue one. As you may think, we have to go in each file and change it! Now because we only have three files, but imagine that we have 200. It would be really frustrating. 
-There is a solution for that!
-We can create our color as constant, and then call them. Then, if we have to change our green color for blue, we only have to do it in one place! 
+# Create a folder for the styled constants
 
-In our styles folders, let's create a js file with the name colors.
+Let's create a folder for the styled constants (src/styles)
 
-<!-- imagen de colors trree -->
+```sh
+cd src
+mkdir styles
+```
+## Create a file for colors:
 
-Let's define our three colors. 
+So far, in our project, we used the `colors` green, gray and black. 
+
+Let's imagine that we want to `replace` our `green` color for a `blue` one. 
+
+Instead of going in `each file` and replace all the green colors for blue ones, we can `create` a `constant` and then change it in only `one place`. 
+
+- Create a `colors file` in the `styles` folder:
+
+```sh
+touch styles.js
+```
+
+- Define the colors: 
 ```javascript
 const colors = {
     black: "#333333",
@@ -35,7 +47,7 @@ const colors = {
     greenDark: "#134240"
 }
 ```
-Now that we define our colors, we have to create our constant and export them so our project can reach them and use them. 
+- Create the `constants` and `export` them:
 
 ```javascript
 const colors = {
@@ -53,11 +65,12 @@ export const green = colors.green
 
 export const yellow = colors.yellow
 ```
+*NOTE: this way you only import the constant that you need in each file.*
 
-This is very good too, because now we can use the colors separate. We dont have to import all the file, we only import the color that we want to use in that file. 
-Let's change in our components the colors. 
-In ImageWithStyle.js we have to change that background color. For that we have to import the color. Our style is inside a string. We have to read the constant. For that we have to write ${...}. Let's see an example. 
-TIP: if you have the constant created, you can start writing it where you need it, and it will appear and option to auto import it. If not, you will have to write it in the top of our file. 
+- Import the `constants` and use them:
+
+In `ImageWithStyle.js`, change the `background color`. 
+
 ```javascript
 import { black } from '../../styles/colors'
 const bgBlack = `{
@@ -65,27 +78,36 @@ const bgBlack = `{
 }`
 
 ```
+*NOTE: if you have the constant created, you can start writing it in the file where you have to used it, and it will appear an option to auto import it.* 
+
 And that's it! You can try changing all the colors!
 
-As we did it with colors, we can do it with other styles. In our StyledRow in LoginPage.js we have display:flex and align-items:center. We have these two in the span of RadioButton.js too. 
-These properties are very useful because they align our content vertically. We are going to use them a LOT in our projects. Let's create anothe file for this kind of styling, for example, displays.js.
+## Create a file for general styles:
 
-<!-- imagen del tree con displays -->
+`StyledRow` in `LoginPage.js` has the following properties:  `display:flex` and `align-items:center`. These two also are defined in the `span` of `RadioButton.js`. 
 
-Now let's create our style. As we are going to use it directly as we are doing so far in our styledComponents, we are going to create the constant we the same format. Es un string, no?
+These `properties` are very `useful` because they `align` our content `vertically`. We are going to use them a LOT in our projects. 
+
+- Let's create the file generalStyles.js.
+
+```sh
+touch generalStyles.js
+```
+
+- Create the `constants` and `export` them:
 
 ```javascript
 export const alignVertically = `{
     display: flex;
     align-items: center
-}`
+}`;
 ```
+- Import the `constants` and use them:
 
-Then we are going to use this in LoginPage and RadioButton. 
-Remember always to import them!
-In RadioButton.js:
+  - In RadioButton.js:
+
 ```javascript
-import { alignVertically } from '../../styles/displays';
+import { alignVertically } from '../../styles/generalStyles';
 const StyledSpan = styled.span`
      {
         ${alignVertically};
@@ -94,9 +116,10 @@ const StyledSpan = styled.span`
     }
 `
 ```
-In LoginPage.js
+  - In LoginPage.js:
+
 ```javascript
-import { alignVertically } from '../styles/displays';
+import { alignVertically } from '../styles/generalStyles';
 const StyledRow = styled(Row)`{
     ${alignVertically};
     text-align: center;
@@ -105,4 +128,3 @@ const StyledRow = styled(Row)`{
 }`
 
 ```
-As you can see, the imports are not the same. Why is that? Because LoginPage is not in the same level as RadioButton, so for the last one we have to move outside generics. 
