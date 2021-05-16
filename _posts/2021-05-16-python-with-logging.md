@@ -1,12 +1,12 @@
 ---
 title: "Using the logging lib on python"
-date: 2021-05-16T12:56:30+02:00
+date: 2021-05-16T10:40:30+01:00
 categories:
   - tips
 tags:
   - python
   - log
-last_modified_at: 2021-05-16T12:56:30+02:00
+last_modified_at: 2021-05-16T10:40:30+01:00
 ---
 
 In this post we are going to use the `logging lib` to write messages, in **production** we are going to write to a `Rotating File` and in **development** we are going to write to the `console`.
@@ -96,6 +96,3 @@ $ ENV=PROD python main.py
 $ cat /tmp/my_app.log 
 2021-05-16 13:13:20,353;INFO;Info message
 ```
-
-
-
