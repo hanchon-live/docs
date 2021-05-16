@@ -56,7 +56,7 @@ if ENV == 'DEV':
     level = logging.DEBUG
 else:
     # Rotating file handler
-    handler = RotatingFileHandler(f'{LOG_FOLDER}/my_app.log', maxBytes=2000, backupCount=10)
+    handler = RotatingFileHandler(LOG_FOLDER + '/my_app.log', maxBytes=2000, backupCount=10)
     formatter = logging.Formatter('%(asctime)s,%(msecs)03d;%(levelname)s;%(message)s', '%Y-%m-%d %H:%M:%S')
     level = logging.INFO
 
