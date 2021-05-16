@@ -78,8 +78,6 @@ if __name__ == '__main__':
     logger.debug('Debug message')
 ```
 
-*NOTE: you can use the logger anywhere just importing `logger` from `src.logger`*
-
 # Test the logger:
 Run the `main.py` file without any option and the output should be like this:
 
@@ -96,3 +94,5 @@ $ ENV=PROD python main.py
 $ cat /tmp/my_app.log 
 2021-05-16 13:13:20,353;INFO;Info message
 ```
+
+*NOTE: you can use the logger anywhere just importing `logger` from `src.logger`*
