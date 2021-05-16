@@ -2,7 +2,7 @@
 title: "Simple guide to install and configure NGINX on Ubuntu"
 date: 2021-04-26T22:10:30+01:00
 categories:
-  - guide
+  - guides
 tags:
   - nginx
   - ubuntu

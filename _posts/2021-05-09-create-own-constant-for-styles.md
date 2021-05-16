@@ -2,7 +2,7 @@
 title: "Constants styles"
 date: 2021-05-09T20:18:30+01:00
 categories:
-  - tip
+  - tips
 tags:
   - styled-components
   - classes 
